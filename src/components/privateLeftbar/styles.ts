@@ -53,4 +53,5 @@ width: auto;
 max-width: 150px;
 max-height: 150px;
 border-radius: 5px;
+cursor: pointer;
 `

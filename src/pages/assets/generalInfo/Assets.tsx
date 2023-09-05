@@ -33,7 +33,7 @@ export default function Assets () {
   const dispatch = useAppDispatch()
 
   const { authState } = useAppSelector(state => state)
-  const tongue = authState.language
+  const tongue = authState.pageStatus.language
   const infoInputs = LANGUAGE[tongue]
 
   const schema = yup.object({

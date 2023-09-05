@@ -15,7 +15,7 @@ import { columns } from '../../config/constants/table/tableRow'
 export default function AllAssets () {
   const { authState } = useAppSelector(state => state)
   const dispatch = useAppDispatch()
-  const tongue = authState.language
+  const tongue = authState.pageStatus.language
   const tagText = LANGUAGE[tongue].tagText
   const rightMenu = LANGUAGE[tongue].privateRightbar
 

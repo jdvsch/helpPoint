@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage'
 const persistAuthConfig = {
   key: 'root',
   storage,
-  whitelist: ['logged', 'language', 'theme', 'token', 'user', 'navbar', 'modal', 'sidebar'],
+  whitelist: ['modal', 'pageStatus', 'sidebar'],
   blacklist: []
 }
 

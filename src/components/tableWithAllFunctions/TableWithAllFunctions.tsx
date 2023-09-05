@@ -44,7 +44,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { LANGUAGE } from '../../config/constants/language/components/tableWithAllFunctions'
 import { lightTheme, darkTheme } from '../../styles/themes'
 import { ExcelOutput } from './subMenu/Excel'
-import { setTModal } from '../../redux/slices/authState'
+import { setModal } from '../../redux/slices/authState'
 
 interface Id {
   id: number | string
@@ -94,9 +94,9 @@ interface TableData {
 export default function TableWithAllFunctions ({ tableData, tableColumns }: TableData) {
   const dispatch = useAppDispatch()
   const { authState } = useAppSelector((state) => state)
-  const tongue = authState.language
+  const tongue = authState.pageStatus.language
   const tableTag = LANGUAGE[tongue].TableWithAllFunctions
-  const color = authState.theme
+  const color = authState.pageStatus.theme
   let themeMode: ThemesMode
   color === 'light' ? (themeMode = lightTheme) : (themeMode = darkTheme)
 
@@ -122,7 +122,7 @@ export default function TableWithAllFunctions ({ tableData, tableColumns }: Tabl
 
   const exportDataExcel = () => {
     if (table.getSelectedRowModel().flatRows.length === 0) {
-      dispatch(setTModal({
+      dispatch(setModal({
         initialState: true,
         type: 'warning',
         message: tableTag.Warninig

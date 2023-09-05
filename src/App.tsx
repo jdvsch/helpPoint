@@ -6,7 +6,8 @@ import { GloblaStyle } from './styles/GlobalStyle'
 
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useAppSelector } from './hooks/redux'
+import { useAppSelector, useAppDispatch } from './hooks/redux'
+import { setPageStatus } from './redux/slices/authState'
 
 import Assets from './pages/assets/generalInfo/Assets'
 import Dashboard from './pages/dashboard/Dashboard'
@@ -21,20 +22,20 @@ import PublicTopbar from './components/publicTopbar/PublicTopbar'
 
 export default function App () {
   const { authState } = useAppSelector(state => state)
-  const [theme] = React.useState(authState.theme === 'light' ? lightTheme : darkTheme)
+  const [theme] = React.useState(authState.pageStatus.theme === 'light' ? lightTheme : darkTheme)
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     const handleResize = () => {
       // do magic for resize
-      console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+      // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+      dispatch(setPageStatus({ windowWidth: window.innerWidth }))
     }
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
-  // if (screen.width < 900) { console.log('Pequeña') } else { console.log('grande') }
 
   const PrivateMenu = {
     dashboard: { path: '/dashboard', element: <Dashboard /> },
@@ -47,7 +48,7 @@ export default function App () {
       <ThemeProvider theme={theme}>
       <GloblaStyle />
       <MainDiv >
-      {authState.logged
+      {authState.pageStatus.logged
         ? <PrivateTopbar Height={Measures.privateTopbar}/>
         : <PublicTopbar Height={Measures.publicTopbar}/>
       }
@@ -58,24 +59,24 @@ export default function App () {
 
       <Routes>
         <Route path="/"
-          element={authState.logged
+          element={authState.pageStatus.logged
             ? <Navigate to={'/dashboard'} replace />
             : <Home />}
         />
 
           <Route path="/login"
-            element={authState.logged
+            element={authState.pageStatus.logged
               ? <Navigate to={'/dashboard'} replace />
               : <LogIn />}
           />
 
           <Route path="*"
-            element={authState.logged
+            element={authState.pageStatus.logged
               ? <Navigate to={'/dashboard'} replace />
               : <Navigate to={'/'} replace />}
           />
 
-          <Route element={<ProtectedRoute isActivate={authState.logged} />}>
+          <Route element={<ProtectedRoute isActivate={authState.pageStatus.logged} />}>
           {authState.sidebar.menuOptions.map((data, index) => (<Route key={index} path={PrivateMenu[data].path} element={PrivateMenu[data].element} />))}
           </Route>
         </Routes>

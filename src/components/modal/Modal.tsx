@@ -2,7 +2,7 @@ import { OuterDiv, InnerDiv, AlertMessage, AlertDiv, AlertImg, ButtonAlert } fro
 import AlertSign from '../../assets/AlertSign.png'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { setTModal } from '../../redux/slices/authState'
+import { setModal } from '../../redux/slices/authState'
 
 export default function Modal () {
   const { authState } = useAppSelector((state) => state)
@@ -10,7 +10,7 @@ export default function Modal () {
   const ModalData = authState.modal
 
   const toggle = () => {
-    dispatch(setTModal({
+    dispatch(setModal({
       initialState: false,
       type: '',
       message: '',
