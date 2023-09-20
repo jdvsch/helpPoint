@@ -9,11 +9,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from './hooks/redux'
 import { setPageStatus } from './redux/slices/authState'
 
-import Assets from './pages/assets/generalInfo/Assets'
+import Main from './pages/assets/main/Main'
 import Dashboard from './pages/dashboard/Dashboard'
 import AllAssets from './pages/allAssets/AllAssets'
 import Home from './pages/home/Home'
 import LogIn from './pages/login/Login'
+import TVTools from './pages/tools/tableView/TVTools'
 import Modal from './components/modal/Modal'
 import PrivateLeftbar from './components/privateLeftbar/PrivateLeftbar'
 import PrivateTopbar from './components/privateTopbar/PrivateTopbar'
@@ -39,8 +40,9 @@ export default function App () {
 
   const PrivateMenu = {
     dashboard: { path: '/dashboard', element: <Dashboard /> },
+    tools: { path: '/tools', element: <TVTools /> },
     allAssets: { path: '/allAssets', element: <AllAssets /> },
-    assets: { path: '/assets', element: <Assets /> }
+    assets: { path: '/assets', element: <Main /> }
   }
 
   return (

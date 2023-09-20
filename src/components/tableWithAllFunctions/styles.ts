@@ -134,7 +134,7 @@ display: flex;
 export const Span = styled.span`
 display: flex;
 margin: 0 7px;
-font-size: 16   px;
+font-size: 16px;
 `
 
 export const Input = styled.input`

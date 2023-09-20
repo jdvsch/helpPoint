@@ -3,7 +3,6 @@ import { MainDiv, DivInfoTag, DivTable } from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { LANGUAGE } from '../../config/constants/language/privatePages/allAssets'
 
-
 import React from 'react'
 import InfoTag from '../../components/infoTag/InfoTag'
 import TableWithAllFunctions from '../../components/tableWithAllFunctions/TableWithAllFunctions'

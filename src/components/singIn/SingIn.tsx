@@ -53,7 +53,7 @@ export default function SignIn () {
       .then((userCredential) => {
         // console.log(userCredential)
         dispatch(setPageStatus({ logged: true, language: 'English', theme: 'light', token: userCredential.user.accessToken, user: userCredential.user.uid, windowWidth: window.innerWidth }))
-        dispatch(setSidebar({ menuOptions: ['dashboard', 'allAssets', 'assets'] }))
+        dispatch(setSidebar({ menuOptions: ['dashboard', 'allAssets', 'assets', 'tools'] }))
       })
       .catch(() => {
         // console.log(err.code)
