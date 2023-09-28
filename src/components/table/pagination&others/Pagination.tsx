@@ -10,8 +10,6 @@ interface Props<T extends RowData> {
   pageIndex: number
   pageSize: number
   previousPage: () => void
-  refreshData: () => void
-  rerender: () => void
   // eslint-disable-next-line @typescript-eslint/ban-types
   rowSelection: Object
   setPageIndex: (index: number) => void
@@ -19,8 +17,7 @@ interface Props<T extends RowData> {
   totalRows: number
 }
 
-export function ActionButtons<T extends RowData> ({
-  getSelectedRowModel,
+export function Pagination<T extends RowData> ({
   hasNextPage,
   hasPreviousPage,
   nextPage,
@@ -28,12 +25,8 @@ export function ActionButtons<T extends RowData> ({
   pageIndex,
   pageSize,
   previousPage,
-  refreshData,
-  rerender,
-  rowSelection,
   setPageIndex,
-  setPageSize,
-  totalRows
+  setPageSize
 }: Props<T>) {
   return (
     <React.Fragment>
@@ -98,43 +91,8 @@ export function ActionButtons<T extends RowData> ({
           ))}
         </select>
       </div>
-      <div>{totalRows} Rows</div>
-      <div className="flex items-center gap-2">
-        <div>
-          <button className="border p-1 rounded" onClick={rerender}>
-            Force Rerender
-          </button>
-        </div>
-        <div>
-          <button className="border p-1 rounded" onClick={refreshData}>
-            Refresh Data
-          </button>
-        </div>
-        <div>
-          <button
-            className="border rounded p-2 mb-2"
-            onClick={() => { console.info('rowSelection', rowSelection) }}
-          >
-            Log `rowSelection` state
-          </button>
-        </div>
-        <div>
-          <button
-            className="border rounded p-2 mb-2"
-            onClick={() => {
-              console.info(
-                'table.getSelectedFlatRows()',
-                getSelectedRowModel().flatRows
-              )
-            }
-            }
-          >
-            Log table.getSelectedFlatRows()
-          </button>
-        </div>
-      </div>
     </React.Fragment>
   )
 }
 
-export default ActionButtons
+export default Pagination

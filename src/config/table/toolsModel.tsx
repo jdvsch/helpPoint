@@ -1,8 +1,8 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { type toolsDataType } from '../../fakeData/tools'
-import IndeterminateCheckbox from '../../components/tableCheckbox/InderterminateCheckbox'
+import IndeterminateCheckbox from '../../components/table/pagination&others/InderterminateCheckbox'
 
-export const columns: Array<ColumnDef<toolsDataType>> = [
+export const toolsModel: Array<ColumnDef<toolsDataType>> = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -52,5 +52,4 @@ export const columns: Array<ColumnDef<toolsDataType>> = [
     header: 'time',
     accessorKey: 'time'
   }
-
 ]

@@ -4,7 +4,7 @@ type Props = {
   indeterminate?: boolean
 } & React.HTMLProps<HTMLInputElement>
 
-function IndeterminateCheckbox ({
+export default function IndeterminateCheckbox ({
   indeterminate,
   className = '',
   ...rest
@@ -27,5 +27,3 @@ function IndeterminateCheckbox ({
     />
   )
 }
-
-export default IndeterminateCheckbox

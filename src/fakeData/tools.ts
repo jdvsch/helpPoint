@@ -109,3 +109,124 @@ export const toolsData: toolsDataType[] = [
   { id: 98, tool_name: 'Skid-Steer', boolean: true, year: '4/15/2023', money: '$2.03', number: 78, time: '4:57 PM' },
   { id: 99, tool_name: 'Excavator', boolean: false, year: '9/1/2023', money: '$8.58', number: 6, time: '11:48 PM' },
   { id: 100, tool_name: 'Dragline', boolean: false, year: '9/28/2022', money: '$6.90', number: 35, time: '2:10 PM' }]
+
+export interface Person {
+  firstName: string
+  lastName: string
+  age: number
+  visits: number
+  status: string
+  progress: number
+  id: number
+}
+
+export const defaultData: Person[] = [
+  {
+    firstName: 'tanner1',
+    lastName: 'linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+    id: 1
+  },
+  {
+    firstName: 'tandy',
+    lastName: 'miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+    id: 2
+  },
+  {
+    firstName: 'joe',
+    lastName: 'dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+    id: 3
+  },
+  {
+    firstName: 'tanner4',
+    lastName: 'linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+    id: 4
+  },
+  {
+    firstName: 'tandy',
+    lastName: 'miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+    id: 5
+  },
+  {
+    firstName: 'joe',
+    lastName: 'dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+    id: 6
+  },
+  {
+    firstName: 'tanner7',
+    lastName: 'linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+    id: 7
+  },
+  {
+    firstName: 'tandy',
+    lastName: 'miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+    id: 8
+  },
+  {
+    firstName: 'joe',
+    lastName: 'dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+    id: 9
+  },
+  {
+    firstName: 'tanner10',
+    lastName: 'linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+    id: 10
+  },
+  {
+    firstName: 'tandy11',
+    lastName: 'miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+    id: 11
+  },
+  {
+    firstName: 'joe12',
+    lastName: 'dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+    id: 12
+  }
+]

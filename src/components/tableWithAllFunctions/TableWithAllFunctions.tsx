@@ -279,9 +279,8 @@ export default function TableWithAllFunctions ({ tableData, tableColumns }: Tabl
           {table.getHeaderGroups().map((headerGroup) => (
             <Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <Th
+                <Th key= {header.id}
                   {...{
-                    key: header.id,
                     colSpan: header.colSpan,
                     style: {
                       width: header.getSize()
@@ -309,7 +308,7 @@ export default function TableWithAllFunctions ({ tableData, tableColumns }: Tabl
                       )
                     : null}
 
-                  <Resizer
+                    <Resizer
                     {...{
                       onMouseDown: header.getResizeHandler(),
                       onTouchStart: header.getResizeHandler(),
@@ -321,6 +320,7 @@ export default function TableWithAllFunctions ({ tableData, tableColumns }: Tabl
                           columnResizeMode === 'onEnd' &&
                           header.column.getIsResizing()
                             ? `translateX(${
+                              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                                 table.getState().columnSizingInfo.deltaOffset
                               }px)`
                             : ''
