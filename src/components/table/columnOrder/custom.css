@@ -1,7 +1,15 @@
+.relative{
+  position: relative;
+}
+
+.row:hover{
+background-color: green;
+}
+
 .resizer {
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
   height: 100%;
   width: 5px;
   background: rgba(0, 0, 0, 0.5);
@@ -25,4 +33,3 @@
   }
 }
 
-  

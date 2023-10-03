@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Styles = styled.div`
-    padding: 1rem;
+    /* padding: 1rem;
   
     table {
       border-spacing: 0;
@@ -38,5 +38,5 @@ export const Styles = styled.div`
   
     .pagination {
       padding: 0.5rem;
-    }
+    } */
   `

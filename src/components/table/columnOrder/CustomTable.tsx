@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 import {
   flexRender,
-  type Row,
+  // type Row,
   type RowData,
   type Table
 } from '@tanstack/react-table'
@@ -9,19 +9,20 @@ import {
 import Filter from '../columsFilter/Filter'
 
 import './custom.css'
+import { Th, ColumnName, Resizer, Record } from './styles'
 
-type TableGroup = 'center' | 'left' | 'right'
+// type TableGroup = 'center' | 'left' | 'right'
 
-function getRowGroup<T extends RowData> (row: Row<T>, tg?: TableGroup) {
-  if (tg === 'left') return row.getLeftVisibleCells()
-  if (tg === 'right') return row.getRightVisibleCells()
-  if (tg === 'center') return row.getCenterVisibleCells()
-  return row.getVisibleCells()
-}
+// function getRowGroup<T extends RowData> (row: Row<T>, tg?: TableGroup) {
+//   if (tg === 'left') return row.getLeftVisibleCells()
+//   if (tg === 'right') return row.getRightVisibleCells()
+//   if (tg === 'center') return row.getCenterVisibleCells()
+//   return row.getVisibleCells()
+// }
 
 interface Props<T extends RowData> {
   table: Table<T>
-  tableGroup?: TableGroup
+  // tableGroup?: TableGroup
 }
 
 export default function CustomTable<T extends RowData> ({
@@ -29,6 +30,7 @@ export default function CustomTable<T extends RowData> ({
 }: Props<T>) {
   const first = table.getHeaderGroups()
   first[0].headers[0].column.columnDef.size = 50
+  console.log(first)
 
   return (
     <table>
@@ -36,17 +38,15 @@ export default function CustomTable<T extends RowData> ({
         {first.map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => (
-              <th
+              <Th
                 className="relative"
                 key={header.id}
-                style={{
-                  width: header.getSize()
-                }}
+                style={{ width: header.getSize() }}
                 colSpan={header.colSpan}
               >
                 {header.isPlaceholder ? null : (
                   <>
-                    <div onClick={header.column.getToggleSortingHandler()}>
+                    <ColumnName onClick={header.column.getToggleSortingHandler()} >
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -56,7 +56,7 @@ export default function CustomTable<T extends RowData> ({
                     {{ asc: ' 🔼', desc: ' 🔽' }[
                       header.column.getIsSorted() as string
                     ] ?? null}
-                    </div>
+                    </ColumnName>
                     {header.column.getCanFilter()
                       ? (
                       <div>
@@ -66,7 +66,7 @@ export default function CustomTable<T extends RowData> ({
                       : null}
                   </>
                 )}
-                <div{...{
+                <Resizer {...{
                   onMouseDown: header.getResizeHandler(),
                   onTouchStart: header.getResizeHandler(),
                   className: `resizer ${
@@ -74,16 +74,15 @@ export default function CustomTable<T extends RowData> ({
                         }`
                 }}
                 />
-
-              </th>
+              </Th>
             ))}
           </tr>
         ))}
       </thead>
       <tbody>
         {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {getRowGroup(row).map(cell => (
+          <Record key={row.id} className='row'>
+            {row.getVisibleCells().map(cell => (
               <td
                 key={cell.id}
                 style={{
@@ -93,7 +92,7 @@ export default function CustomTable<T extends RowData> ({
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
-          </tr>
+          </Record>
         ))}
       </tbody>
     </table>
