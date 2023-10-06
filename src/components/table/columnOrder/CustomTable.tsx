@@ -1,28 +1,17 @@
 /* eslint-disable multiline-ternary */
+import { Sth, ColumnName, Resizer, Str, Std } from './styles'
+import { TbArrowBigUpLineFilled, TbArrowBigDownLineFilled } from 'react-icons/tb'
+
 import {
   flexRender,
-  // type Row,
   type RowData,
   type Table
 } from '@tanstack/react-table'
 
 import Filter from '../columsFilter/Filter'
 
-import './custom.css'
-import { Th, ColumnName, Resizer, Record } from './styles'
-
-// type TableGroup = 'center' | 'left' | 'right'
-
-// function getRowGroup<T extends RowData> (row: Row<T>, tg?: TableGroup) {
-//   if (tg === 'left') return row.getLeftVisibleCells()
-//   if (tg === 'right') return row.getRightVisibleCells()
-//   if (tg === 'center') return row.getCenterVisibleCells()
-//   return row.getVisibleCells()
-// }
-
 interface Props<T extends RowData> {
   table: Table<T>
-  // tableGroup?: TableGroup
 }
 
 export default function CustomTable<T extends RowData> ({
@@ -30,7 +19,6 @@ export default function CustomTable<T extends RowData> ({
 }: Props<T>) {
   const first = table.getHeaderGroups()
   first[0].headers[0].column.columnDef.size = 50
-  console.log(first)
 
   return (
     <table>
@@ -38,8 +26,7 @@ export default function CustomTable<T extends RowData> ({
         {first.map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => (
-              <Th
-                className="relative"
+              <Sth
                 key={header.id}
                 style={{ width: header.getSize() }}
                 colSpan={header.colSpan}
@@ -53,46 +40,41 @@ export default function CustomTable<T extends RowData> ({
                     )}
 
                     {/* ORDEN ASCENDENTE DESCENDENTE */}
-                    {{ asc: ' 🔼', desc: ' 🔽' }[
+                    {{ asc: <TbArrowBigUpLineFilled color='rgba(84, 245, 39, 0.8)' size='20px' />, desc: <TbArrowBigDownLineFilled color='rgba(245, 39, 39, 0.8)' size='20px'/> }[
                       header.column.getIsSorted() as string
                     ] ?? null}
                     </ColumnName>
                     {header.column.getCanFilter()
                       ? (
-                      <div>
                         <Filter column={header.column} table={table} />
-                      </div>
                         )
                       : null}
                   </>
                 )}
-                <Resizer {...{
-                  onMouseDown: header.getResizeHandler(),
-                  onTouchStart: header.getResizeHandler(),
-                  className: `resizer ${
-                          header.column.getIsResizing() ? 'isResizing' : ''
-                        }`
-                }}
-                />
-              </Th>
+                {header.id !== 'select' &&
+                  <Resizer {...{
+                    onMouseDown: header.getResizeHandler(),
+                    onTouchStart: header.getResizeHandler(),
+                    className: `resizer ${header.column.getIsResizing() ? 'isResizing' : ''}`
+                  }}/>
+                }
+              </Sth>
             ))}
           </tr>
         ))}
       </thead>
       <tbody>
         {table.getRowModel().rows.map(row => (
-          <Record key={row.id} className='row'>
+          <Str key={row.id}>
             {row.getVisibleCells().map(cell => (
-              <td
+              <Std
                 key={cell.id}
-                style={{
-                  width: cell.column.getSize()
-                }}
+                style={{ maxWidth: cell.column.getSize() }}
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+              </Std>
             ))}
-          </Record>
+          </Str>
         ))}
       </tbody>
     </table>

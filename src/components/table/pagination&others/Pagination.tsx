@@ -1,6 +1,13 @@
 import { type RowData, type RowModel } from '@tanstack/react-table'
 import React from 'react'
 
+import {
+  TbSquareRoundedChevronsLeftFilled,
+  TbSquareRoundedChevronLeftFilled,
+  TbSquareRoundedChevronsRightFilled,
+  TbSquareRoundedChevronRightFilled
+} from 'react-icons/tb'
+
 interface Props<T extends RowData> {
   getSelectedRowModel: () => RowModel<T>
   hasNextPage: boolean
@@ -30,42 +37,38 @@ export function Pagination<T extends RowData> ({
 }: Props<T>) {
   return (
     <React.Fragment>
-      <div className="flex items-center gap-2">
+      <div>
         <button
-          className="border rounded p-1"
           onClick={() => { setPageIndex(0) }}
           disabled={!hasPreviousPage}
         >
-          {'<<'}
+          <TbSquareRoundedChevronsLeftFilled size='20px'/>
         </button>
         <button
-          className="border rounded p-1"
           onClick={() => { previousPage() }}
           disabled={!hasPreviousPage}
         >
-          {'<'}
+          <TbSquareRoundedChevronLeftFilled size='20px'/>
         </button>
         <button
-          className="border rounded p-1"
           onClick={() => { nextPage() }}
           disabled={!hasNextPage}
         >
-          {'>'}
+          <TbSquareRoundedChevronRightFilled size='20px'/>
         </button>
         <button
-          className="border rounded p-1"
           onClick={() => { setPageIndex(pageCount - 1) }}
           disabled={!hasNextPage}
         >
-          {'>>'}
+          <TbSquareRoundedChevronsRightFilled size='20px'/>
         </button>
-        <span className="flex items-center gap-1">
+        <span>
           <div>Page</div>
           <strong>
             {pageIndex + 1} of {pageCount}
           </strong>
         </span>
-        <span className="flex items-center gap-1">
+        <span>
           | Go to page:
           <input
             type="number"
@@ -74,11 +77,9 @@ export function Pagination<T extends RowData> ({
               const page = (e.target.value.length > 0) ? Number(e.target.value) - 1 : 0
               setPageIndex(page)
             }}
-            className="border p-1 rounded w-16"
           />
         </span>
         <select
-          className="border p-1 rounded"
           value={pageSize}
           onChange={e => {
             setPageSize(Number(e.target.value))

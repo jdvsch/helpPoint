@@ -15,7 +15,7 @@ import {
 } from '@tanstack/react-table'
 
 import { useSkipper } from './pagination&others/hooks'
-import ActionButtons from './pagination&others/Pagination'
+import Pagination from './pagination&others/Pagination'
 import CustomTable from './columnOrder/CustomTable'
 import ColumnView from './columnView/ColumnView'
 
@@ -78,7 +78,7 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
         <CustomTable table={table} />
       </div>
 
-      <ActionButtons
+      <Pagination
         getSelectedRowModel={table.getSelectedRowModel}
         hasNextPage={table.getCanNextPage()}
         hasPreviousPage={table.getCanPreviousPage()}

@@ -10,40 +10,38 @@ interface NumberInputProps {
 
 const NumberInput: React.FC<NumberInputProps> = ({
   columnFilterValue,
-  getFacetedMinMaxValues,
   setFilterValue
 }) => {
-  const minOpt = getFacetedMinMaxValues()?.[0]
-  const min = Number(minOpt ?? '')
-
-  const maxOpt = getFacetedMinMaxValues()?.[1]
-  const max = Number(maxOpt)
-
   return (
     <div>
-      <div className="flex space-x-2">
+      <div>
         <DebouncedInput
+        style={{
+          width: '70px',
+          textAlign: 'center',
+          borderRadius: '5px',
+          cursor: 'pointer'
+        }}
           type="number"
-          min={min}
-          max={max}
           value={columnFilterValue?.[0] ?? ''}
           onChange={value => { setFilterValue((old: [number, number]) => [value, old?.[1]]) }
           }
-          placeholder={`Min ${(minOpt != null) ? `(${min})` : ''}`}
-          className="w-24 border shadow rounded"
+          placeholder={'Min...'}
         />
         <DebouncedInput
+        style={{
+          width: '70px',
+          textAlign: 'center',
+          borderRadius: '5px',
+          cursor: 'pointer'
+        }}
           type="number"
-          min={min}
-          max={max}
           value={columnFilterValue?.[1] ?? ''}
           onChange={value => { setFilterValue((old: [number, number]) => [old?.[0], value]) }
           }
-          placeholder={`Max ${(maxOpt != null) ? `(${max})` : ''}`}
-          className="w-24 border shadow rounded"
+          placeholder={'Max...'}
         />
       </div>
-      <div className="h-1" />
     </div>
   )
 }
@@ -59,7 +57,6 @@ interface TextInputProps {
 const TextInput: React.FC<TextInputProps> = ({
   columnId,
   columnFilterValue,
-  columnSize,
   setFilterValue,
   sortedUniqueValues
 }) => {
@@ -73,14 +70,13 @@ const TextInput: React.FC<TextInputProps> = ({
         ))}
       </datalist>
       <DebouncedInput
+        style={{ width: '140px', textAlign: 'center', borderRadius: '5px', cursor: 'pointer' }}
         type="text"
         value={columnFilterValue ?? ''}
         onChange={value => { setFilterValue(value) }}
-        placeholder={`Search... (${columnSize})`}
-        className="w-36 border shadow rounded"
+        placeholder={'Search...'}
         list={dataListId}
       />
-      <div className="h-1" />
     </React.Fragment>
   )
 }
