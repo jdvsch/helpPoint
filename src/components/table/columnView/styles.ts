@@ -11,6 +11,7 @@ margin-bottom:30px;
 cursor: pointer;
 display:block;
 text-align: center;
+user-select: none;
 &:hover{
     background-color: green;
 }
@@ -25,6 +26,7 @@ margin-top: 10px;
 padding: 5px;
 cursor: pointer;
 display:block;
+user-select: none;
 &:hover{
     background-color: greenyellow;
 }

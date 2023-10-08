@@ -9,26 +9,16 @@ interface Props<T extends RowData> {
 export default function ColumnView<T extends RowData> ({
   table
 }: Props<T>) {
-  const obj = table.getState().columnVisibility
-  console.log(obj)
-  
-  // console.log(Object.values(obj))
-
   return (
     <Main>
       <SlabelAll>
-        {Object.keys(table.getState().columnVisibility).length !== 0 &&
-        <>
         <Sinput
+        disabled={!Object.values(table.getState().columnVisibility).includes(false)}
         type="checkbox"
         checked={table.getIsAllColumnsVisible()}
         onChange={table.getToggleAllColumnsVisibilityHandler()}
         />
-        Toggle All
-        </>
-        }
-
-
+        Show all columns
       </SlabelAll>
 
       {table.getAllLeafColumns().map(column => (
