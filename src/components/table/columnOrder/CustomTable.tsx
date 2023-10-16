@@ -4,6 +4,7 @@ import { TbArrowBigUpLineFilled, TbArrowBigDownLineFilled } from 'react-icons/tb
 
 import {
   flexRender,
+  type Cell,
   type RowData,
   type Table
 } from '@tanstack/react-table'
@@ -20,11 +21,20 @@ export default function CustomTable<T extends RowData> ({
   const first = table.getHeaderGroups()
   first[0].headers[0].column.columnDef.size = 50
 
+  const handleclick = (rowId: string, cellData: Cell<T, unknown>) => {
+    if (cellData.column.id !== 'select') {
+      // call the page with data
+      console.log(cellData.column.id)
+      console.log(cellData)
+      console.log(rowId)
+    }
+  }
+
   return (
-    <table>
+    <table {...{ style: { width: table.getCenterTotalSize() } }}>
       <thead>
         {first.map(headerGroup => (
-          <tr key={headerGroup.id}>
+          <tr key={headerGroup.id} >
             {headerGroup.headers.map(header => (
               <Sth
                 key={header.id}
@@ -40,7 +50,7 @@ export default function CustomTable<T extends RowData> ({
                     )}
 
                     {/* ORDEN ASCENDENTE DESCENDENTE */}
-                    {{ asc: <TbArrowBigUpLineFilled color='rgba(84, 245, 39, 0.8)' size='20px' />, desc: <TbArrowBigDownLineFilled color='rgba(245, 39, 39, 0.8)' size='20px'/> }[
+                    {{ asc: <TbArrowBigUpLineFilled color='rgba(84, 245, 39, 0.8)' size='18px' />, desc: <TbArrowBigDownLineFilled color='rgba(245, 39, 39, 0.8)' size='18px'/> }[
                       header.column.getIsSorted() as string
                     ] ?? null}
                     </ColumnName>
@@ -65,9 +75,11 @@ export default function CustomTable<T extends RowData> ({
       </thead>
       <tbody>
         {table.getRowModel().rows.map(row => (
-          <Str key={row.id}>
+          <Str key={row.id} className={table.getState().rowSelection[row.id] ? 'rowSelected' : ''} >
             {row.getVisibleCells().map(cell => (
               <Std
+                className={cell.column.id === 'select' ? 'checkbox' : ''}
+                onClick={() => { handleclick(row.id, cell) }}
                 key={cell.id}
                 style={{ maxWidth: cell.column.getSize() }}
               >

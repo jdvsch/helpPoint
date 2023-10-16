@@ -12,13 +12,27 @@ cursor: pointer;
 display:block;
 text-align: center;
 user-select: none;
+
 &:hover{
     background-color: green;
+}
+
+&.disabled{
+    color: gray;
+    cursor: not-allowed;
+}
+
+&.disabled:hover{
+    background-color: black;
 }
 `
 
 export const Sinput = styled.input`
 margin-right: 10px;
+
+&.disabled{
+    display:none;
+}
 `
 
 export const SlabelOptions = styled.label`

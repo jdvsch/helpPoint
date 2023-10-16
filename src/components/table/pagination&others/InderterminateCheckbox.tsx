@@ -6,7 +6,6 @@ type Props = {
 
 export default function IndeterminateCheckbox ({
   indeterminate,
-  className = '',
   ...rest
 }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -22,7 +21,6 @@ export default function IndeterminateCheckbox ({
     <input
       type="checkbox"
       ref={ref}
-      className={className + ' cursor-pointer'}
       {...rest}
     />
   )

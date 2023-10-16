@@ -98,8 +98,8 @@ margin-bottom: 20px;
 
 export const Button = styled.button<Props>`
 margin: 0 10px;
-font-size: ${props => props.fSize ? props.fSize : '18px'};
-color: ${props => props.Color ? props.Color : ''};
+font-size: ${props => props.fSize !== null ? props.fSize : '18px'};
+color: ${props => props.Color !== null ? props.Color : ''};
 border: none;
 background-color: transparent;
 cursor: pointer;
@@ -107,8 +107,8 @@ font-weight: bold;
 `
 
 export const Label = styled.label<Props>`
-color: ${props => props.Color ? props.Color : ''};
-background-color: ${props => props.bgColor ? props.bgColor : ''};
+color: ${props => props.Color !== null ? props.Color : ''};
+background-color: ${props => props.bgColor !== null ? props.bgColor : ''};
 margin: 10px;
 padding: 5px 7px;
 border-radius: 10px;

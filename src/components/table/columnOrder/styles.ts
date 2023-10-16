@@ -3,13 +3,15 @@ import styled from 'styled-components'
 export const Sth = styled.th`
 position: relative;
 text-align: start;
-padding: 5px;
+padding: 5px 0;
 border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 user-select: none;
 `
 
 export const ColumnName = styled.div`
 display: flex;
+cursor: pointer;
+padding: 0 0 5px 0;
 &:hover {
     color: gray;
 }
@@ -40,6 +42,10 @@ touch-action: none;
 `
 
 export const Str = styled.tr`
+&.rowSelected{
+    background-color: rgba(1, 43, 240, 0.5);
+}
+
 &:hover {
     background-color: rgba(81, 243, 240, 0.5);
 }
@@ -47,8 +53,12 @@ export const Str = styled.tr`
 
 export const Std = styled.td`
 border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-padding: 5px;
+padding: 5px 0;
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+
+&.checkbox {
+    text-align: center;
+}
 `

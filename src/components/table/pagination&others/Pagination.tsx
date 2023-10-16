@@ -1,5 +1,6 @@
+import { Main, Sbutton, Sspan, Sinput, Sselect } from './styles'
+
 import { type RowData, type RowModel } from '@tanstack/react-table'
-import React from 'react'
 
 import {
   TbSquareRoundedChevronsLeftFilled,
@@ -36,63 +37,58 @@ export function Pagination<T extends RowData> ({
   setPageSize
 }: Props<T>) {
   return (
-    <React.Fragment>
-      <div>
-        <button
-          onClick={() => { setPageIndex(0) }}
-          disabled={!hasPreviousPage}
-        >
-          <TbSquareRoundedChevronsLeftFilled size='20px'/>
-        </button>
-        <button
-          onClick={() => { previousPage() }}
-          disabled={!hasPreviousPage}
-        >
-          <TbSquareRoundedChevronLeftFilled size='20px'/>
-        </button>
-        <button
-          onClick={() => { nextPage() }}
-          disabled={!hasNextPage}
-        >
-          <TbSquareRoundedChevronRightFilled size='20px'/>
-        </button>
-        <button
-          onClick={() => { setPageIndex(pageCount - 1) }}
-          disabled={!hasNextPage}
-        >
-          <TbSquareRoundedChevronsRightFilled size='20px'/>
-        </button>
-        <span>
-          <div>Page</div>
-          <strong>
-            {pageIndex + 1} of {pageCount}
-          </strong>
-        </span>
-        <span>
-          | Go to page:
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = (e.target.value.length > 0) ? Number(e.target.value) - 1 : 0
-              setPageIndex(page)
-            }}
-          />
-        </span>
-        <select
-          value={pageSize}
+    <Main>
+      <Sbutton
+        onClick={() => { setPageIndex(0) }}
+        disabled={!hasPreviousPage}
+      >
+        <TbSquareRoundedChevronsLeftFilled size='20px'/>
+      </Sbutton>
+      <Sbutton
+        onClick={() => { previousPage() }}
+        disabled={!hasPreviousPage}
+      >
+        <TbSquareRoundedChevronLeftFilled size='20px'/>
+      </Sbutton>
+      <Sspan>
+        Page <strong> {pageIndex + 1} of {pageCount} </strong>
+      </Sspan>
+      <Sbutton
+        onClick={() => { nextPage() }}
+        disabled={!hasNextPage}
+      >
+        <TbSquareRoundedChevronRightFilled size='20px'/>
+      </Sbutton>
+      <Sbutton
+        onClick={() => { setPageIndex(pageCount - 1) }}
+        disabled={!hasNextPage}
+      >
+        <TbSquareRoundedChevronsRightFilled size='20px'/>
+      </Sbutton>
+      <Sspan>
+        Go to page
+        <Sinput
+          type="number"
+          defaultValue={pageIndex + 1}
           onChange={e => {
-            setPageSize(Number(e.target.value))
+            const page = (e.target.value.length > 0) ? Number(e.target.value) - 1 : 0
+            setPageIndex(page)
           }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
-    </React.Fragment>
+        />
+      </Sspan>
+      <Sselect
+        value={pageSize}
+        onChange={e => {
+          setPageSize(Number(e.target.value))
+        }}
+      >
+        {[10, 20, 30, 40, 50].map(pageSize => (
+          <option key={pageSize} value={pageSize}>
+            Show {pageSize}
+          </option>
+        ))}
+      </Sselect>
+    </Main>
   )
 }
 

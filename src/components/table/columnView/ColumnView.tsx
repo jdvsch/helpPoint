@@ -11,12 +11,13 @@ export default function ColumnView<T extends RowData> ({
 }: Props<T>) {
   return (
     <Main>
-      <SlabelAll>
+      <SlabelAll className={Object.values(table.getState().columnVisibility).includes(false) ? '' : 'disabled' }>
         <Sinput
         disabled={!Object.values(table.getState().columnVisibility).includes(false)}
         type="checkbox"
         checked={table.getIsAllColumnsVisible()}
         onChange={table.getToggleAllColumnsVisibilityHandler()}
+        className={Object.values(table.getState().columnVisibility).includes(false) ? '' : 'disabled'}
         />
         Show all columns
       </SlabelAll>

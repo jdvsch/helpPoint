@@ -18,6 +18,7 @@ import { useSkipper } from './pagination&others/hooks'
 import Pagination from './pagination&others/Pagination'
 import CustomTable from './columnOrder/CustomTable'
 import ColumnView from './columnView/ColumnView'
+import ExportFunction from './exportFunction/ExportFunction'
 
 interface tableType<T> {
   tableData: T[]
@@ -71,27 +72,28 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
 
   return (
     <Styles>
-      <div>
-        <ColumnView table={table}/>
-      </div>
+
+      <ExportFunction />
+      {/* <ColumnView table={table}/> */}
+
       <div>
         <CustomTable table={table} />
-      </div>
 
-      <Pagination
-        getSelectedRowModel={table.getSelectedRowModel}
-        hasNextPage={table.getCanNextPage()}
-        hasPreviousPage={table.getCanPreviousPage()}
-        nextPage={table.nextPage}
-        pageCount={table.getPageCount()}
-        pageIndex={table.getState().pagination.pageIndex}
-        pageSize={table.getState().pagination.pageSize}
-        previousPage={table.previousPage}
-        rowSelection={rowSelection}
-        setPageIndex={table.setPageIndex}
-        setPageSize={table.setPageSize}
-        totalRows={table.getPrePaginationRowModel().rows.length}
-      />
+        <Pagination
+          getSelectedRowModel={table.getSelectedRowModel}
+          hasNextPage={table.getCanNextPage()}
+          hasPreviousPage={table.getCanPreviousPage()}
+          nextPage={table.nextPage}
+          pageCount={table.getPageCount()}
+          pageIndex={table.getState().pagination.pageIndex}
+          pageSize={table.getState().pagination.pageSize}
+          previousPage={table.previousPage}
+          rowSelection={rowSelection}
+          setPageIndex={table.setPageIndex}
+          setPageSize={table.setPageSize}
+          totalRows={table.getPrePaginationRowModel().rows.length}
+        />
+      </div>
     </Styles>
   )
 }
