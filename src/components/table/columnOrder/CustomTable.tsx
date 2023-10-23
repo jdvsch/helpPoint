@@ -78,7 +78,7 @@ export default function CustomTable<T extends RowData> ({
           <Str key={row.id} className={table.getState().rowSelection[row.id] ? 'rowSelected' : ''} >
             {row.getVisibleCells().map(cell => (
               <Std
-                className={cell.column.id === 'select' ? 'checkbox' : ''}
+                className={cell.column.id === 'select' ? 'checkbox' : 'noCheckbox'}
                 onClick={() => { handleclick(row.id, cell) }}
                 key={cell.id}
                 style={{ maxWidth: cell.column.getSize() }}

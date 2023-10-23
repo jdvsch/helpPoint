@@ -1,10 +1,14 @@
+// fakeAPI
+import { GlobalStatus, LeftSidebar } from '../../fakeAPIdata/loginData'
+
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { MainDiv, Form, Img, Span, Input, Button, Div, Icon } from './styles'
-import helpPOint from '../../assets/helpPoint.png'
+import helpPOint from '../../images/helpPoint.png'
 
 import React from 'react'
 import { LANGUAGE } from '../../config/constants/language/publicPages/singIn'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { setPageStatus, setSidebar } from '../../redux/slices/authState'
+import { setGlobalStatus, setLeftSidebar } from '../../redux/slices/authState'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authFirebase } from '../../firebase/firebase'
@@ -31,7 +35,7 @@ const schema = yup.object({
 
 export default function SignIn () {
   const { authState } = useAppSelector(state => state)
-  const idiom = authState.pageStatus.language
+  const idiom = authState.globalStatus.language
   const SignInData = LANGUAGE[idiom].singIn
 
   const [loginError, setLoginError] = React.useState('')
@@ -51,9 +55,10 @@ export default function SignIn () {
   const onSubmit: SubmitHandler<FormValues> = formInfo => {
     signInWithEmailAndPassword(authFirebase, formInfo.email, formInfo.password)
       .then((userCredential) => {
-        // console.log(userCredential)
-        dispatch(setPageStatus({ logged: true, language: 'English', theme: 'light', token: userCredential.user.accessToken, user: userCredential.user.uid, windowWidth: window.innerWidth }))
-        dispatch(setSidebar({ menuOptions: ['dashboard', 'allAssets', 'assets', 'tools'] }))
+        // console.log(userCredential.user)
+        // estos datos deben de venir de la API
+        dispatch(setGlobalStatus(GlobalStatus))
+        dispatch(setLeftSidebar(LeftSidebar))
       })
       .catch(() => {
         // console.log(err.code)

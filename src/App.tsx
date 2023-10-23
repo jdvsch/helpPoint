@@ -7,30 +7,28 @@ import { GloblaStyle } from './styles/GlobalStyle'
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from './hooks/redux'
-import { setPageStatus } from './redux/slices/authState'
+import { setGlobalStatus } from './redux/slices/authState'
 
-import Main from './pages/assets/main/Main'
 import Dashboard from './pages/dashboard/Dashboard'
-import AllAssets from './pages/allAssets/AllAssets'
+import AllAssets from './pages/allAssets/viewControl/Main'
 import Home from './pages/home/Home'
 import LogIn from './pages/login/Login'
-import TVTools from './pages/tools/tableView/TVTools'
-import Modal from './components/modal/Modal'
-import PrivateLeftbar from './components/privateLeftbar/PrivateLeftbar'
-import PrivateTopbar from './components/privateTopbar/PrivateTopbar'
+import FeedbackModal from './components/modal/alertModal/FeedbackModal'
+import LeftMenuModal from './components/modal/leftMenuModal/LeftMenuModal'
+import PrivateTopbar from './components/navbar/privateTopbar/PrivateTopbar'
 import ProtectedRoute from './config/routes/ProtectedRoute'
-import PublicTopbar from './components/publicTopbar/PublicTopbar'
+import PublicTopbar from './components/navbar/publicTopbar/PublicTopbar'
 
 export default function App () {
   const { authState } = useAppSelector(state => state)
-  const [theme] = React.useState(authState.pageStatus.theme === 'light' ? lightTheme : darkTheme)
+  const [theme] = React.useState(authState.globalStatus.theme === 'light' ? lightTheme : darkTheme)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     const handleResize = () => {
       // do magic for resize
       // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
-      dispatch(setPageStatus({ windowWidth: window.innerWidth }))
+      dispatch(setGlobalStatus({ windowWidth: window.innerWidth }))
     }
     window.addEventListener('resize', handleResize)
     return () => {
@@ -40,9 +38,7 @@ export default function App () {
 
   const PrivateMenu = {
     dashboard: { path: '/dashboard', element: <Dashboard /> },
-    tools: { path: '/tools', element: <TVTools /> },
-    allAssets: { path: '/allAssets', element: <AllAssets /> },
-    assets: { path: '/assets', element: <Main /> }
+    allAssets: { path: '/assets', element: <AllAssets /> }
   }
 
   return (
@@ -50,36 +46,36 @@ export default function App () {
       <ThemeProvider theme={theme}>
       <GloblaStyle />
       <MainDiv >
-      {authState.pageStatus.logged
+      {authState.globalStatus.logged
         ? <PrivateTopbar Height={Measures.privateTopbar}/>
         : <PublicTopbar Height={Measures.publicTopbar}/>
       }
 
-      { authState.modal.initialState && <Modal/> }
+      { authState.feedbackModal.initialState && <FeedbackModal/> }
 
-      { authState.sidebar.initialState && <PrivateLeftbar/> }
+      { authState.leftSidebar.initialState && <LeftMenuModal/> }
 
       <Routes>
         <Route path="/"
-          element={authState.pageStatus.logged
+          element={authState.globalStatus.logged
             ? <Navigate to={'/dashboard'} replace />
             : <Home />}
         />
 
           <Route path="/login"
-            element={authState.pageStatus.logged
+            element={authState.globalStatus.logged
               ? <Navigate to={'/dashboard'} replace />
               : <LogIn />}
           />
 
           <Route path="*"
-            element={authState.pageStatus.logged
+            element={authState.globalStatus.logged
               ? <Navigate to={'/dashboard'} replace />
               : <Navigate to={'/'} replace />}
           />
 
-          <Route element={<ProtectedRoute isActivate={authState.pageStatus.logged} />}>
-          {authState.sidebar.menuOptions.map((data, index) => (<Route key={index} path={PrivateMenu[data].path} element={PrivateMenu[data].element} />))}
+          <Route element={<ProtectedRoute isActivate={authState.globalStatus.logged} />}>
+          {authState.leftSidebar.menuOptions.map((data, index) => (<Route key={index} path={PrivateMenu[data].path} element={PrivateMenu[data].element} />))}
           </Route>
         </Routes>
       </MainDiv>

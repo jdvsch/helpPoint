@@ -1,35 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface AuthState {
-  modal: { initialState: boolean, type: string, message: string, style: Record<string, unknown> }
-  pageStatus: { logged: boolean, language: string, theme: string, token: string, user: string, windowWidth: number }
-  sidebar: { initialState: boolean, menuOptions: string[] }
+  feedbackModal: { initialState: boolean, type: string, message: string, style: Record<string, unknown> }
+  globalStatus: { logged: boolean, language: string, theme: string, token: string, user: string, windowWidth: number }
+  leftSidebar: { initialState: boolean, menuOptions: string[], menuRightOptions: string[], menuOptionSelected: string }
+  viewPageControl: { mainCategory: string, subcategory: string, idToEdit: '' }
 }
 
 const initialState: AuthState = {
-  modal: { initialState: false, type: '', message: '', style: {} },
-  pageStatus: { logged: false, language: 'English', theme: 'light', token: '', user: '', windowWidth: 0 },
-  sidebar: { initialState: false, menuOptions: [] }
+  feedbackModal: { initialState: false, type: '', message: '', style: {} },
+  globalStatus: { logged: false, language: 'English', theme: 'light', token: '', user: '', windowWidth: 0 },
+  leftSidebar: { initialState: false, menuOptions: [], menuRightOptions: [], menuOptionSelected: '' },
+  viewPageControl: { mainCategory: '', subcategory: '', idToEdit: '' }
 }
 
 const authSlice = createSlice({
   name: 'authState',
   initialState,
   reducers: {
-    setModal: (state, action) => {
-      state.modal = { ...state.modal, ...action.payload }
+    setFeedbackModal: (state, action) => {
+      state.feedbackModal = { ...state.feedbackModal, ...action.payload }
     },
-    setPageStatus: (state, action) => {
-      state.pageStatus = { ...state.pageStatus, ...action.payload }
+    setGlobalStatus: (state, action) => {
+      state.globalStatus = { ...state.globalStatus, ...action.payload }
     },
-    setSidebar: (state, action) => {
+    setLeftSidebar: (state, action) => {
+      state.leftSidebar = { ...state.leftSidebar, ...action.payload }
+    },
+    setViewPageControl: (state, action) => {
       // console.log(state)
       // console.log(action)
-      state.sidebar = { ...state.sidebar, ...action.payload }
+      state.viewPageControl = { ...state.viewPageControl, ...action.payload }
     }
   }
 })
 
-export const { setModal, setPageStatus, setSidebar } = authSlice.actions
+export const { setFeedbackModal, setGlobalStatus, setLeftSidebar, setViewPageControl } = authSlice.actions
 
 export default authSlice.reducer

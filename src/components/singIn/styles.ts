@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import cmms from '../../assets/cmms.png'
+import cmms from '../../images/cmms.png'
 
 export const MainDiv = styled.div`
 display:flex;

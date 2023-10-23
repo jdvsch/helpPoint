@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Main = styled.div`
 display: flex;
-margin-top: 10px;
+margin: 10px;
 `
 
 export const Sbutton = styled.button`

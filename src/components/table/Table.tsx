@@ -1,4 +1,4 @@
-import { Styles } from './styles'
+import { MainDiv, TableDiv } from './styles'
 
 import React from 'react'
 import {
@@ -18,7 +18,8 @@ import { useSkipper } from './pagination&others/hooks'
 import Pagination from './pagination&others/Pagination'
 import CustomTable from './columnOrder/CustomTable'
 import ColumnView from './columnView/ColumnView'
-import ExportFunction from './exportFunction/ExportFunction'
+import MenuOptions from './menuOptions/MenuOptions'
+import RightMenuModal from '../modal/rightMenuModal/RightMenuModal'
 
 interface tableType<T> {
   tableData: T[]
@@ -27,6 +28,7 @@ interface tableType<T> {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export default function Table<T extends {}> ({ tableData, columns }: tableType<T>) {
+  const [showModal, setShowModal] = React.useState(false)
   const [data] = React.useState(tableData)
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
@@ -71,12 +73,15 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
   }, [table.getState().columnFilters[0]?.id])
 
   return (
-    <Styles>
+    <MainDiv>
 
-      <ExportFunction />
-      {/* <ColumnView table={table}/> */}
+      <MenuOptions table={table} showModal={showModal} setShowModal={setShowModal}/>
 
-      <div>
+      {showModal &&
+      <RightMenuModal showModal={showModal} setShowModal={setShowModal}> <ColumnView table={table}/> </RightMenuModal>
+      }
+
+      <TableDiv>
         <CustomTable table={table} />
 
         <Pagination
@@ -93,7 +98,7 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
           setPageSize={table.setPageSize}
           totalRows={table.getPrePaginationRowModel().rows.length}
         />
-      </div>
-    </Styles>
+      </TableDiv>
+    </MainDiv>
   )
 }

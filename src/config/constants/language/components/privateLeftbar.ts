@@ -1,15 +1,11 @@
 const English = {
   dashboard: 'dashboard',
-  allAssets: 'all assets',
-  assets: 'assets',
-  tools: 'tools'
+  assets: 'all assets'
 }
 
 const Español = {
   dashboard: 'panel',
-  allAssets: 'todos los activos',
-  assets: 'activos',
-  tools: 'herremientas'
+  assets: 'todos los activos'
 }
 
 export const LANGUAGE = { English, Español }

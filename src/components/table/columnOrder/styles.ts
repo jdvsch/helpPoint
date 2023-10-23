@@ -61,4 +61,8 @@ white-space: nowrap;
 &.checkbox {
     text-align: center;
 }
+
+&.noCheckbox {
+    cursor: pointer;
+}
 `
