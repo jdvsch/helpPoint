@@ -10,7 +10,7 @@ export default function SingOut () {
 
   const handleSingOut = () => {
     signOut(authFirebase).then(() => {
-      dispatch(setGlobalStatus({ logged: false, language: 'English', theme: '', token: '', user: '' }))
+      dispatch(setGlobalStatus({ logged: false, language: 'English', theme: 'light', token: '', user: '' }))
       dispatch(setLeftSidebar({ initialState: false, menuOptions: [] }))
     })
       .catch(err => {

@@ -25,8 +25,9 @@ export const MainDiv = styled.div<Props>`
   display: flex;
   flex-direction: column;
   animation: ${animation1} 300ms ease 0s normal none;
-  padding: ${props => ((props.Padding ?? '').length > 0) ? props.Padding : '0 25px'};
+  padding: ${props => ((props.Padding ?? '').length > 0) ? props.Padding : '25px'};
   width: ${props => ((props.Width ?? '').length > 0) ? props.Width : '230px'};
+  overflow: auto;
 `
 
 export const Sbutton = styled.button`

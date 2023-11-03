@@ -16,7 +16,7 @@ export default function PrivateTopbar ({ Height }: Props) {
   return (
     <MainDiv Height={Height}>
       <Button onClick={() => { showHidetSidebar() }}>
-        <GiHamburgerMenu style={{ color: 'green' }}/>
+        <GiHamburgerMenu />
       </Button>
 
       <Location>

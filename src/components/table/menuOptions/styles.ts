@@ -12,6 +12,8 @@ display: flex;
 justify-content: space-between;
 margin-top: 5px;
 margin-bottom: 10px;
+padding: 5px;
+background-color: ${({ theme }) => theme.bg5};
 `
 
 export const LeftMenu = styled.div`
@@ -19,7 +21,8 @@ display: flex;
 `
 
 export const Sselect = styled.select`
-margin: 0 10px;
+padding: 0 10px;
+font-weight: bold;
 `
 
 export const CenterMenu = styled.div`
@@ -36,10 +39,10 @@ border: none;
 background-color: transparent;
 cursor: pointer;
 font-size: 25px;
-color: ${props => ((props.Color ?? '').length > 0) ? props.Color : 'black'};
+color: ${({ theme }) => theme.text5};
 
 &:hover{
-  color: ${props => ((props.bgColor ?? '').length > 0) ? props.bgColor : ''};
+  color: ${props => props.bgColor};
 }
 
 &:hover span{
@@ -53,10 +56,10 @@ color: ${props => ((props.Color ?? '').length > 0) ? props.Color : 'black'};
 export const Sspan = styled.span<Props>`
 position: absolute;
 font-size: 12px;
-left: ${props => ((props.Left ?? '').length > 0) ? props.Left : ''};
-right: ${props => ((props.Right ?? '').length > 0) ? props.Right : ''};
-background-color: black;
-color: white;
+left: ${props => props.Left};
+right: ${props => props.Right};
+background-color: ${({ theme }) => theme.text5};
+color: ${({ theme }) => theme.bg1};
 white-space: nowrap;
 padding: 5px;
 border-radius: 5px;

@@ -21,6 +21,9 @@ border-bottom: solid 2px black;
 background-color: ${({ theme }) => theme.bg2};
 resize:vertical;
 min-height: 50px;
+border-radius: 5px;
+padding: 0 4px;
+text-overflow: ellipsis;
 `
 
 export const ErrorMessage = styled.span`

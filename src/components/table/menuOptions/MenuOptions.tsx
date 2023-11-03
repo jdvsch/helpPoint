@@ -63,15 +63,14 @@ export default function MenuOptions<T extends RowData> ({
     <MainDiv>
       <LeftMenu>
         <Sselect>
-          <option value="">location</option>
-          <option value="">asset</option>
-          <option value="">tool</option>
-          <option value="">vehicle</option>
-          <option value="">spare</option>
+          <option key={1} value={1}>location</option>
+          <option key={2} value={2}>asset</option>
+          <option key={3} value={3}>tool</option>
+          <option key={4} value={4}>vehicle</option>
+          <option key={5} value={5}>spare</option>
         </Sselect>
 
         <CenterMenu>
-          advise, you didnt save it
         </CenterMenu>
       </LeftMenu>
 

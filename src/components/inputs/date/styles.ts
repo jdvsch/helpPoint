@@ -20,6 +20,7 @@ border: none;
 outline: none;
 border-bottom: solid 2px black;
 background-color: ${({ theme }) => theme.bg2};
+border-radius: 5px;
 `
 
 export const ErrorMessage = styled.span`

@@ -1,4 +1,4 @@
-import React from 'react'
+import { MainDiv } from './styles'
 import { useAppSelector } from '../../../hooks/redux'
 
 import Attachments from '../attachments/Main'
@@ -23,5 +23,5 @@ export default function Main () {
   }
   const PageToRender = selectPageToRender[viewController as keyof typeof selectPageToRender]
 
-  return (<PageToRender />)
+  return (<MainDiv><PageToRender /></MainDiv>)
 }

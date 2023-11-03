@@ -1,6 +1,9 @@
 /* eslint-disable multiline-ternary */
+import React from 'react'
 import { Sth, ColumnName, Resizer, Str, Std } from './styles'
 import { TbArrowBigUpLineFilled, TbArrowBigDownLineFilled } from 'react-icons/tb'
+
+import { useAppDispatch } from '../../../hooks/redux'
 
 import {
   flexRender,
@@ -10,6 +13,7 @@ import {
 } from '@tanstack/react-table'
 
 import Filter from '../columsFilter/Filter'
+import { setViewPageControl } from '../../../redux/slices/authState'
 
 interface Props<T extends RowData> {
   table: Table<T>
@@ -21,12 +25,15 @@ export default function CustomTable<T extends RowData> ({
   const first = table.getHeaderGroups()
   first[0].headers[0].column.columnDef.size = 50
 
+  const dispatch = useAppDispatch()
+
   const handleclick = (rowId: string, cellData: Cell<T, unknown>) => {
     if (cellData.column.id !== 'select') {
       // call the page with data
-      console.log(cellData.column.id)
-      console.log(cellData)
-      console.log(rowId)
+      dispatch(setViewPageControl({ mainCategory: 'allAssets', subcategory: 'generalInfo', idToEdit: cellData.row.original }))
+      // console.log(cellData.column.id)
+      // console.log(cellData.row.original)
+      // console.log(rowId)
     }
   }
 
@@ -34,20 +41,23 @@ export default function CustomTable<T extends RowData> ({
     <table {...{ style: { width: table.getCenterTotalSize() } }}>
       <thead>
         {first.map(headerGroup => (
-          <tr key={headerGroup.id} >
-            {headerGroup.headers.map(header => (
+          <tr key={headerGroup.id}>
+            {headerGroup.headers.map((header, i) => (
               <Sth
                 key={header.id}
-                style={{ width: header.getSize() }}
+                Width={header.getSize().toString() + 'px'}
                 colSpan={header.colSpan}
+                className={header.id === 'select' ? 'select' : ''}
               >
                 {header.isPlaceholder ? null : (
                   <>
                     <ColumnName onClick={header.column.getToggleSortingHandler()} >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                      <div style={{ marginRight: '8px' }}>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      </div>
 
                     {/* ORDEN ASCENDENTE DESCENDENTE */}
                     {{ asc: <TbArrowBigUpLineFilled color='rgba(84, 245, 39, 0.8)' size='18px' />, desc: <TbArrowBigDownLineFilled color='rgba(245, 39, 39, 0.8)' size='18px'/> }[

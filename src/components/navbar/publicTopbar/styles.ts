@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 export interface Props {
   Height?: string
+  Color?: string
 }
 
 export const MainDiv = styled.div<Props>`
@@ -35,7 +36,16 @@ export const Link = styled(NavLink)`
 text-decoration: none;
 margin: 0 10px;
 font-size: 1.25rem;
-    &.active{
-        color: orange;
-    }
+color: ${({ theme }) => theme.text5};
+
+&.active{
+  color: ${({ theme }) => theme.text4};
+}
+`
+
+export const Button = styled.button<Props>`
+color: ${({ theme }) => theme.text4};
+background-color: transparent;
+border: none;
+font-size: 30px;
 `

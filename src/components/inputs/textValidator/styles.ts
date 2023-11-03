@@ -20,6 +20,9 @@ border: none;
 outline: none;
 border-bottom: solid 2px black;
 background-color: ${({ theme }) => theme.bg2};
+border-radius: 5px;
+padding: 0 4px;
+text-overflow: ellipsis;
 `
 
 export const ErrorMessage = styled.span`

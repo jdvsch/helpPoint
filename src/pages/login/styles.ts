@@ -7,5 +7,5 @@ border-radius: 5px;
 display: flex;
 justify-content: center;
 align-items: center;
-background-color: lightblue;
+background-color: ${({ theme }) => theme.bg2};
 `

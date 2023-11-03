@@ -83,8 +83,9 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
 
       <TableDiv>
         <CustomTable table={table} />
+      </TableDiv>
 
-        <Pagination
+      <Pagination
           getSelectedRowModel={table.getSelectedRowModel}
           hasNextPage={table.getCanNextPage()}
           hasPreviousPage={table.getCanPreviousPage()}
@@ -98,7 +99,6 @@ export default function Table<T extends {}> ({ tableData, columns }: tableType<T
           setPageSize={table.setPageSize}
           totalRows={table.getPrePaginationRowModel().rows.length}
         />
-      </TableDiv>
     </MainDiv>
   )
 }

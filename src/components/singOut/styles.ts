@@ -1,14 +1,22 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-font-size: 2rem;
-margin-bottom: 5px;
-border: none;
-cursor: pointer;
-border-radius: 5px;
-&:hover{
-    background-color: ${({ theme }) => theme.text};
     width: 100%;
-    color: ${({ theme }) => theme.bg};
-}
+
+    font-size: 2rem;
+    margin-bottom: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color:transparent;
+
+    &:hover{
+        background-color: ${({ theme }) => theme.bg1};
+        width: 100%;
+        color: ${({ theme }) => theme.bg};
+    }
+
+    svg{
+        color: ${({ theme }) => theme.text1};
+    }
 `

@@ -4,14 +4,16 @@ export interface AuthState {
   feedbackModal: { initialState: boolean, type: string, message: string, style: Record<string, unknown> }
   globalStatus: { logged: boolean, language: string, theme: string, token: string, user: string, windowWidth: number }
   leftSidebar: { initialState: boolean, menuOptions: string[], menuRightOptions: string[], menuOptionSelected: string }
-  viewPageControl: { mainCategory: string, subcategory: string, idToEdit: '' }
+  loader: { loading: boolean, error: string }
+  viewPageControl: { mainCategory: string, subcategory: string, idToEdit: Record<string, unknown> }
 }
 
 const initialState: AuthState = {
   feedbackModal: { initialState: false, type: '', message: '', style: {} },
   globalStatus: { logged: false, language: 'English', theme: 'light', token: '', user: '', windowWidth: 0 },
   leftSidebar: { initialState: false, menuOptions: [], menuRightOptions: [], menuOptionSelected: '' },
-  viewPageControl: { mainCategory: '', subcategory: '', idToEdit: '' }
+  loader: { loading: false, error: '' },
+  viewPageControl: { mainCategory: '', subcategory: '', idToEdit: {} }
 }
 
 const authSlice = createSlice({
@@ -27,6 +29,9 @@ const authSlice = createSlice({
     setLeftSidebar: (state, action) => {
       state.leftSidebar = { ...state.leftSidebar, ...action.payload }
     },
+    setLoader: (state, action) => {
+      state.loader = { ...state.loader, ...action.payload }
+    },
     setViewPageControl: (state, action) => {
       // console.log(state)
       // console.log(action)
@@ -35,6 +40,6 @@ const authSlice = createSlice({
   }
 })
 
-export const { setFeedbackModal, setGlobalStatus, setLeftSidebar, setViewPageControl } = authSlice.actions
+export const { setFeedbackModal, setGlobalStatus, setLeftSidebar, setLoader, setViewPageControl } = authSlice.actions
 
 export default authSlice.reducer

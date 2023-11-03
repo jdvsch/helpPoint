@@ -15,6 +15,7 @@ import Home from './pages/home/Home'
 import LogIn from './pages/login/Login'
 import FeedbackModal from './components/modal/alertModal/FeedbackModal'
 import LeftMenuModal from './components/modal/leftMenuModal/LeftMenuModal'
+import Loader from './components/modal/loader/Loader'
 import PrivateTopbar from './components/navbar/privateTopbar/PrivateTopbar'
 import ProtectedRoute from './config/routes/ProtectedRoute'
 import PublicTopbar from './components/navbar/publicTopbar/PublicTopbar'
@@ -36,16 +37,27 @@ export default function App () {
     }
   }, [])
 
-  const PrivateMenu = {
+  interface LeftMenu {
+    dashboard: {
+      path: string
+      element: JSX.Element
+    }
+    allAssets: {
+      path: string
+      element: JSX.Element
+    }
+  }
+
+  const PrivateMenu: LeftMenu = {
     dashboard: { path: '/dashboard', element: <Dashboard /> },
-    allAssets: { path: '/assets', element: <AllAssets /> }
+    allAssets: { path: '/allAssets', element: <AllAssets /> }
   }
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
       <GloblaStyle />
-      <MainDiv >
+      <MainDiv>
       {authState.globalStatus.logged
         ? <PrivateTopbar Height={Measures.privateTopbar}/>
         : <PublicTopbar Height={Measures.publicTopbar}/>
@@ -54,6 +66,8 @@ export default function App () {
       { authState.feedbackModal.initialState && <FeedbackModal/> }
 
       { authState.leftSidebar.initialState && <LeftMenuModal/> }
+
+      { authState.loader.loading && <Loader/> }
 
       <Routes>
         <Route path="/"
@@ -73,6 +87,8 @@ export default function App () {
               ? <Navigate to={'/dashboard'} replace />
               : <Navigate to={'/'} replace />}
           />
+
+          <Route key={1} path='/j' element={<Home />} />
 
           <Route element={<ProtectedRoute isActivate={authState.globalStatus.logged} />}>
           {authState.leftSidebar.menuOptions.map((data, index) => (<Route key={index} path={PrivateMenu[data].path} element={PrivateMenu[data].element} />))}

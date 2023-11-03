@@ -18,7 +18,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 border-radius: 50%;
-background-color: #457b9d;
+background-color: ${({ theme }) => theme.bg3};
 `
 
 export const Img = styled.img`
@@ -46,16 +46,16 @@ export const Button = styled.button`
 margin-top: 5px;
 width: 100px;
 height: 40px;
-background-color: #52b69a;
+background-color: ${({ theme }) => theme.bg2};
 border-radius: 20px;
 border: none;
-color: #495057;
+color: ${({ theme }) => theme.text5};
 font-weight: 700;
 cursor: pointer;
-    &:hover{
-        background-color: #343a40;
-        color: white;
-    }
+
+&:hover{
+    background-color: ${({ theme }) => theme.bg1};
+}
 `
 
 export const Div = styled.div`

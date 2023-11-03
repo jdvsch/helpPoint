@@ -13,36 +13,34 @@ const NumberInput: React.FC<NumberInputProps> = ({
   setFilterValue
 }) => {
   return (
-    <div>
-      <div>
-        <DebouncedInput
-        style={{
-          width: '70px',
-          textAlign: 'center',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
-          type="number"
-          value={columnFilterValue?.[0] ?? ''}
-          onChange={value => { setFilterValue((old: [number, number]) => [value, old?.[1]]) }
-          }
-          placeholder={'Min...'}
-        />
-        <DebouncedInput
-        style={{
-          width: '70px',
-          textAlign: 'center',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
-          type="number"
-          value={columnFilterValue?.[1] ?? ''}
-          onChange={value => { setFilterValue((old: [number, number]) => [old?.[0], value]) }
-          }
-          placeholder={'Max...'}
-        />
-      </div>
-    </div>
+    <>
+      <DebouncedInput
+      style={{
+        width: '70px',
+        textAlign: 'center',
+        borderRadius: '5px',
+        cursor: 'pointer'
+      }}
+        type="number"
+        value={columnFilterValue?.[0] ?? ''}
+        onChange={value => { setFilterValue((old: [number, number]) => [value, old?.[1]]) }
+        }
+        placeholder={'Min...'}
+      />
+      <DebouncedInput
+      style={{
+        width: '70px',
+        textAlign: 'center',
+        borderRadius: '5px',
+        cursor: 'pointer'
+      }}
+        type="number"
+        value={columnFilterValue?.[1] ?? ''}
+        onChange={value => { setFilterValue((old: [number, number]) => [old?.[0], value]) }
+        }
+        placeholder={'Max...'}
+      />
+    </>
   )
 }
 
@@ -63,7 +61,7 @@ const TextInput: React.FC<TextInputProps> = ({
   const dataListId = columnId + 'list'
 
   return (
-    <React.Fragment>
+    <>
       <datalist id={dataListId}>
         {sortedUniqueValues.slice(0, 5000).map((value: any) => (
           <option value={value} key={value} />
@@ -77,7 +75,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={'Search...'}
         list={dataListId}
       />
-    </React.Fragment>
+    </>
   )
 }
 

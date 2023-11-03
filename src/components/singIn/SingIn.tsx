@@ -6,9 +6,9 @@ import { MainDiv, Form, Img, Span, Input, Button, Div, Icon } from './styles'
 import helpPOint from '../../images/helpPoint.png'
 
 import React from 'react'
-import { LANGUAGE } from '../../config/constants/language/publicPages/singIn'
+import { LANGUAGE } from '../../config/language/publicPages/singIn'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { setGlobalStatus, setLeftSidebar } from '../../redux/slices/authState'
+import { setGlobalStatus, setLeftSidebar, setLoader } from '../../redux/slices/authState'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authFirebase } from '../../firebase/firebase'
@@ -53,6 +53,7 @@ export default function SignIn () {
   })
 
   const onSubmit: SubmitHandler<FormValues> = formInfo => {
+    dispatch(setLoader({ loading: true }))
     signInWithEmailAndPassword(authFirebase, formInfo.email, formInfo.password)
       .then((userCredential) => {
         // console.log(userCredential.user)
@@ -64,6 +65,9 @@ export default function SignIn () {
         // console.log(err.code)
         setLoginError('Check your user / password')
       })
+      .finally(() => { dispatch(setLoader({ loading: false })) })
+      // antes del finally deberia estar los fetch de la consulta globalstatus y leftsidebar
+      // antes del finally deberia estar los fetch de la consulta globalstatus y leftsidebar
   }
 
   return (

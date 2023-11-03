@@ -5,18 +5,23 @@ export interface Props {
 }
 
 export const MainDiv = styled.div<Props>`
-height: ${props => props.Height};
-width: 100%;
-background-color: ${({ theme }) => theme.bg3};
-display: flex;
+  height: ${props => props.Height};
+  width: 100%;
+  background-color: ${({ theme }) => theme.bg3};
+  display: flex;
 `
 
 export const Button = styled.button`
-background-color: transparent;
-font-size: 1.8rem;
-margin: 0 20px;
-border: 0px;
-cursor: pointer;
+  background-color: transparent;
+  font-size: 1.8rem;
+  margin: 0 20px;
+  border: 0px;
+  cursor: pointer;
+
+  svg {
+    fill: ${({ theme }) => theme.text1};
+    margin-right: 0.5rem;
+  }
 `
 
 export const Location = styled.div`
