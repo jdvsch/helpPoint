@@ -1,5 +1,5 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import IndeterminateCheckbox from '../../../components/table/pagination&others/InderterminateCheckbox'
+import IndeterminateCheckbox from '../../../components/table/checkBox/InderterminateCheckbox'
 import { type equipmentInterface } from '../../../fakeAPIdata/assetTable'
 
 export const equipmentModel: Array<ColumnDef<equipmentInterface>> = [

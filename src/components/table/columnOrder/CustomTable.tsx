@@ -65,8 +65,8 @@ export default function CustomTable<T extends RowData> ({
                     ] ?? null}
                     </ColumnName>
                     {header.column.getCanFilter()
-                      ? (
-                        <Filter column={header.column} table={table} />
+                      ? (<></>
+                        // <Filter column={header.column} table={table} />
                         )
                       : null}
                   </>

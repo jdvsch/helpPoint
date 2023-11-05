@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainDiv, Sbutton } from './styles'
+import { MainDiv, Sbutton, List } from './styles'
 import { GoSidebarCollapse } from 'react-icons/go'
 
 interface Props {
@@ -13,10 +13,11 @@ export default function RightMenuModal ({ children, showModal, setShowModal }: P
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     setShowModal(!showModal)
   }
+
   return (
     <MainDiv >
       <Sbutton onClick={showHideColumns}><GoSidebarCollapse /></Sbutton>
-      {children}
+      <List>{children}</List>
     </MainDiv>
   )
 }

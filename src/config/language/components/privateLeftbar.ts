@@ -1,10 +1,12 @@
 export const MenuLinks = {
   English: {
-    dashboard: 'dashboard',
-    allAssets: 'all assets'
+    dashboard: 'Dashboard',
+    assets: 'Assets'
   },
   Español: {
     dashboard: 'panel',
-    allAssets: 'todos los activos'
+    assets: 'Activos'
   }
 }
+
+// 'dashboard', 'assets', 'inhousePersonnel', 'workmanament', 'warehouses', 'suppliers', 'setting', 'help'

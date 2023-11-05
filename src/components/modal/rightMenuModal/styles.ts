@@ -15,31 +15,36 @@ const animation1 = keyframes`
 `
 
 export const MainDiv = styled.div<Props>`
-  z-index: 2;
   height: 100%;
+  width: ${({ theme }) => theme.width};
+
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   right: 0;
-  width: fit-content;
+
   background-color: ${({ theme }) => theme.bg3};
-  display: flex;
-  flex-direction: column;
   animation: ${animation1} 300ms ease 0s normal none;
   padding: ${props => ((props.Padding ?? '').length > 0) ? props.Padding : '25px'};
-  width: ${props => ((props.Width ?? '').length > 0) ? props.Width : '230px'};
-  overflow: auto;
+  z-index: 2;
 `
 
 export const Sbutton = styled.button`
   border: none;
   background-color: transparent;
   font-size: 30px;
-  color: orange;
   cursor: pointer;
   padding: 5px;
 
   &:hover{
     background-color: black;
     color: white;
+    border-radius: 5px;
   }
+`
+
+export const List = styled.div`
+
+  overflow:auto;
 `

@@ -1,4 +1,4 @@
-import IndeterminateCheckbox from '../../components/table/pagination&others/InderterminateCheckbox'
+import IndeterminateCheckbox from '../../components/table/checkBox/InderterminateCheckbox'
 import { type ColumnDef } from '@tanstack/react-table'
 import { type Person } from '../../fakeData/tools'
 

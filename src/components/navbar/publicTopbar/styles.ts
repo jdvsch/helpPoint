@@ -30,6 +30,15 @@ width: 50%;
 display: flex;
 align-items: center;
 justify-content: end;
+
+svg {
+  color: ${({ theme }) => theme.text4};
+
+  &:hover{
+    color: ${({ theme }) => theme.bg2};
+    cursor: pointer;
+  }
+}
 `
 
 export const Link = styled(NavLink)`
@@ -39,7 +48,7 @@ font-size: 1.25rem;
 color: ${({ theme }) => theme.text5};
 
 &.active{
-  color: ${({ theme }) => theme.text4};
+  color: ${({ theme }) => theme.bg2};
 }
 `
 
@@ -48,4 +57,8 @@ color: ${({ theme }) => theme.text4};
 background-color: transparent;
 border: none;
 font-size: 30px;
+`
+
+export const Language = styled.div`
+position: relative;
 `

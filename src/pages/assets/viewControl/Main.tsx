@@ -11,7 +11,7 @@ import ThirdParties from '../thirdParties/Main'
 
 export default function Main () {
   const { authState } = useAppSelector(state => state)
-  const viewController = authState.viewPageControl.subcategory
+  const viewController = authState.viewPageControl.submenuOptionsSelected
   const selectPageToRender = {
     attachments: Attachments,
     customInfo: CustomInfo,

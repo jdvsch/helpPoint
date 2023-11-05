@@ -1,24 +1,30 @@
+import React from 'react'
+
 import { MainDiv } from './stylesApp'
 import { Measures } from './styles/variables'
+
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from './styles/themes'
 import { GloblaStyle } from './styles/GlobalStyle'
-
-import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from './hooks/redux'
 import { setGlobalStatus } from './redux/slices/authState'
 
-import Dashboard from './pages/dashboard/Dashboard'
-import AllAssets from './pages/allAssets/viewControl/Main'
-import Home from './pages/home/Home'
-import LogIn from './pages/login/Login'
-import FeedbackModal from './components/modal/alertModal/FeedbackModal'
-import LeftMenuModal from './components/modal/leftMenuModal/LeftMenuModal'
 import Loader from './components/modal/loader/Loader'
 import PrivateTopbar from './components/navbar/privateTopbar/PrivateTopbar'
 import ProtectedRoute from './config/routes/ProtectedRoute'
 import PublicTopbar from './components/navbar/publicTopbar/PublicTopbar'
+
+import Assets from './pages/assets/viewControl/Main'
+import Dashboard from './pages/dashboard/Dashboard'
+import Help from './pages/help/Help'
+import Home from './pages/home/Home'
+import LogIn from './pages/login/Login'
+import Personnel from './pages/inHousePersonnel/Personnel'
+import Setting from './pages/setting/Setting'
+import Suppliers from './pages/suppliers/Suppliers'
+import Warehouses from './pages/warehouses/Warehouses'
+import WorkManament from './pages/workManament/WorkManament'
 
 export default function App () {
   const { authState } = useAppSelector(state => state)
@@ -37,20 +43,15 @@ export default function App () {
     }
   }, [])
 
-  interface LeftMenu {
-    dashboard: {
-      path: string
-      element: JSX.Element
-    }
-    allAssets: {
-      path: string
-      element: JSX.Element
-    }
-  }
-
-  const PrivateMenu: LeftMenu = {
-    dashboard: { path: '/dashboard', element: <Dashboard /> },
-    allAssets: { path: '/allAssets', element: <AllAssets /> }
+  const ProtectedRouteOptions = {
+    assets: <Route key={'assets'} path='/assets' element={<Assets />} />,
+    dashboard: <Route key={'dashboard'} path='/dashboard' element={<Dashboard />} />,
+    help: <Route key={'help'} path='/help' element={<Help />} />,
+    inhousePersonnel: <Route key={'personnel'} path='/personnel' element={<Personnel />} />,
+    setting: <Route key={'setting'} path='/setting' element={<Setting />} />,
+    suppliers: <Route key={'suppliers'} path='/suppliers' element={<Suppliers />} />,
+    warehouses: <Route key={'warehouses'} path='/warehouses' element={<Warehouses />} />,
+    workManament: <Route key={'workManament'} path='/workManament' element={<WorkManament />} />
   }
 
   return (
@@ -58,41 +59,36 @@ export default function App () {
       <ThemeProvider theme={theme}>
       <GloblaStyle />
       <MainDiv>
-      {authState.globalStatus.logged
+      {authState.globalStatus.user !== ''
         ? <PrivateTopbar Height={Measures.privateTopbar}/>
         : <PublicTopbar Height={Measures.publicTopbar}/>
       }
-
-      { authState.feedbackModal.initialState && <FeedbackModal/> }
-
-      { authState.leftSidebar.initialState && <LeftMenuModal/> }
 
       { authState.loader.loading && <Loader/> }
 
       <Routes>
         <Route path="/"
-          element={authState.globalStatus.logged
+          element={authState.globalStatus.user !== ''
             ? <Navigate to={'/dashboard'} replace />
             : <Home />}
         />
 
           <Route path="/login"
-            element={authState.globalStatus.logged
+            element={authState.globalStatus.user !== ''
               ? <Navigate to={'/dashboard'} replace />
               : <LogIn />}
           />
 
           <Route path="*"
-            element={authState.globalStatus.logged
+            element={authState.globalStatus.user !== ''
               ? <Navigate to={'/dashboard'} replace />
               : <Navigate to={'/'} replace />}
           />
 
-          <Route key={1} path='/j' element={<Home />} />
-
-          <Route element={<ProtectedRoute isActivate={authState.globalStatus.logged} />}>
-          {authState.leftSidebar.menuOptions.map((data, index) => (<Route key={index} path={PrivateMenu[data].path} element={PrivateMenu[data].element} />))}
+          <Route element={<ProtectedRoute isActivate={authState.globalStatus.user !== ''} />}>
+          {authState.accessPermits.menuOptions.map(data => ProtectedRouteOptions[data as keyof typeof ProtectedRouteOptions])}
           </Route>
+
         </Routes>
       </MainDiv>
       </ThemeProvider>

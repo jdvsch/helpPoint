@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth'
 import { authFirebase } from '../../firebase/firebase'
 import { useAppDispatch } from '../../hooks/redux'
-import { setGlobalStatus, setLeftSidebar } from '../../redux/slices/authState'
+import { setGlobalStatus, setAccessPermits } from '../../redux/slices/authState'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { Button } from './styles'
 
@@ -11,7 +11,7 @@ export default function SingOut () {
   const handleSingOut = () => {
     signOut(authFirebase).then(() => {
       dispatch(setGlobalStatus({ logged: false, language: 'English', theme: 'light', token: '', user: '' }))
-      dispatch(setLeftSidebar({ initialState: false, menuOptions: [] }))
+      dispatch(setAccessPermits({ menuOptions: [], menuOptionSelected: '', submenuOptions: {} }))
     })
       .catch(err => {
         console.log('error')

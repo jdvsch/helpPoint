@@ -14,7 +14,7 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 
-import { useSkipper } from './pagination&others/hooks'
+import { useSkipper } from './hook/hooks'
 import Pagination from './pagination&others/Pagination'
 import CustomTable from './columnOrder/CustomTable'
 import ColumnView from './columnView/ColumnView'

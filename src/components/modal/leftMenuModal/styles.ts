@@ -23,7 +23,7 @@ export const MainDiv = styled.div`
   left: 0;
 
   padding: 0 5px;
-  background-color: ${({ theme }) => theme.bg2};
+  background-color: ${({ theme }) => theme.bg3};
   animation: ${animation1} 300ms ease 0s normal none;
   z-index: 2;
   overflow: auto;

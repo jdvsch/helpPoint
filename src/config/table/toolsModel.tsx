@@ -1,6 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { type toolsDataType } from '../../fakeData/tools'
-import IndeterminateCheckbox from '../../components/table/pagination&others/InderterminateCheckbox'
+import IndeterminateCheckbox from '../../components/table/checkBox/InderterminateCheckbox'
 
 export const toolsModel: Array<ColumnDef<toolsDataType>> = [
   {

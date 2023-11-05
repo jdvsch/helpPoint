@@ -1,19 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface AuthState {
+  accessPermits: { menuOptions: string[], menuOptionDefault: string, submenuOptions: Record<string, unknown> }
   feedbackModal: { initialState: boolean, type: string, message: string, style: Record<string, unknown> }
-  globalStatus: { logged: boolean, language: string, theme: string, token: string, user: string, windowWidth: number }
-  leftSidebar: { initialState: boolean, menuOptions: string[], menuRightOptions: string[], menuOptionSelected: string }
+  globalStatus: { companyName: string, language: string, tableRowSize: number, theme: string, token: string, user: string, windowWidth: number }
   loader: { loading: boolean, error: string }
-  viewPageControl: { mainCategory: string, subcategory: string, idToEdit: Record<string, unknown> }
+  publicWebPage: { language: string }
+  viewPageControl: { viewLeftMenuModal: boolean, menuOptionSelected: string, submenuOptionsSelected: string, idToEdit: Record<string, unknown> }
 }
 
 const initialState: AuthState = {
+  accessPermits: { menuOptions: [], menuOptionDefault: '', submenuOptions: {} },
   feedbackModal: { initialState: false, type: '', message: '', style: {} },
-  globalStatus: { logged: false, language: 'English', theme: 'light', token: '', user: '', windowWidth: 0 },
-  leftSidebar: { initialState: false, menuOptions: [], menuRightOptions: [], menuOptionSelected: '' },
+  globalStatus: { companyName: '', language: 'English', tableRowSize: 10, theme: 'light', token: '', user: '', windowWidth: 0 },
   loader: { loading: false, error: '' },
-  viewPageControl: { mainCategory: '', subcategory: '', idToEdit: {} }
+  publicWebPage: { language: 'English' },
+  viewPageControl: { viewLeftMenuModal: false, menuOptionSelected: '', submenuOptionsSelected: '', idToEdit: {} }
 }
 
 const authSlice = createSlice({
@@ -26,11 +28,14 @@ const authSlice = createSlice({
     setGlobalStatus: (state, action) => {
       state.globalStatus = { ...state.globalStatus, ...action.payload }
     },
-    setLeftSidebar: (state, action) => {
-      state.leftSidebar = { ...state.leftSidebar, ...action.payload }
+    setAccessPermits: (state, action) => {
+      state.accessPermits = { ...state.accessPermits, ...action.payload }
     },
     setLoader: (state, action) => {
       state.loader = { ...state.loader, ...action.payload }
+    },
+    setPublicWebPage: (state, action) => {
+      state.publicWebPage = { ...state.publicWebPage, ...action.payload }
     },
     setViewPageControl: (state, action) => {
       // console.log(state)
@@ -40,6 +45,6 @@ const authSlice = createSlice({
   }
 })
 
-export const { setFeedbackModal, setGlobalStatus, setLeftSidebar, setLoader, setViewPageControl } = authSlice.actions
+export const { setAccessPermits, setFeedbackModal, setGlobalStatus, setLoader, setPublicWebPage, setViewPageControl } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,16 +1,20 @@
-import { type Props, MainDiv, Button, Location, Span } from './styles'
+import { type Props, MainDiv, Button, InfoTag, Company, Location, PathName } from './styles'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { useAppDispatch } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { useLocation } from 'react-router-dom'
-import { setLeftSidebar } from '../../../redux/slices/authState'
+import { setViewPageControl } from '../../../redux/slices/authState'
+
+import FeedbackModal from '../../modal/alertModal/FeedbackModal'
+import LeftMenuModal from '../../modal/leftMenuModal/LeftMenuModal'
 
 export default function PrivateTopbar ({ Height }: Props) {
   const dispatch = useAppDispatch()
+  const { authState } = useAppSelector(state => state)
   const location = useLocation()
 
   const showHidetSidebar = () => {
-    dispatch(setLeftSidebar({ initialState: true }))
+    dispatch(setViewPageControl({ viewLeftMenuModal: true }))
   }
 
   return (
@@ -19,9 +23,14 @@ export default function PrivateTopbar ({ Height }: Props) {
         <GiHamburgerMenu />
       </Button>
 
-      <Location>
-        Company name(exito)/Sede(envigado)<Span>{location.pathname}</Span>
-      </Location>
+      <InfoTag>
+        <Company>{authState.globalStatus.companyName}</Company><Location>/Sede(envigado)</Location><PathName>{location.pathname}</PathName>
+      </InfoTag>
+
+      { authState.feedbackModal.initialState && <FeedbackModal/> }
+
+      { authState.viewPageControl.viewLeftMenuModal && <LeftMenuModal/> }
+
     </MainDiv>
   )
 }

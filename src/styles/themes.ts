@@ -9,6 +9,7 @@ export interface ThemesValues {
   text3: string
   text4: string
   text5: string
+  width: string
 }
 
 export const lightTheme: ThemesValues = {
@@ -21,7 +22,8 @@ export const lightTheme: ThemesValues = {
   text2: 'rgba(0,0,0,1)',
   text3: 'rgba(0,0,0,1)',
   text4: 'rgba(0,0,0,1)',
-  text5: 'rgba(0,0,0,1)'
+  text5: 'rgba(0,0,0,1)',
+  width: '280px'
 }
 
 export const darkTheme: ThemesValues = {
@@ -34,5 +36,6 @@ export const darkTheme: ThemesValues = {
   text2: 'rgba(97,165,194,1)',
   text3: 'rgba(137,194,217,1)',
   text4: 'rgba(169,214,229,1)',
-  text5: 'rgba(255,255,255,1)'
+  text5: 'rgba(255,255,255,1)',
+  width: '280px'
 }
