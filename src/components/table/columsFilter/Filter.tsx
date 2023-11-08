@@ -1,6 +1,10 @@
-import { type Column, type RowData, type Table } from '@tanstack/react-table'
 import React from 'react'
-import DebouncedInput from './DebouncedInput'
+
+import { type Column, type RowData, type Table } from '@tanstack/react-table'
+import { language } from './laguage'
+
+import DebouncedInput from '../debounce/DebouncedInput'
+import { useAppSelector } from '../../../hooks/redux'
 
 interface NumberInputProps {
   columnFilterValue: [number, number]
@@ -12,6 +16,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
   columnFilterValue,
   setFilterValue
 }) => {
+  const { authState } = useAppSelector(state => state)
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
+
   return (
     <>
       <DebouncedInput
@@ -25,7 +32,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         value={columnFilterValue?.[0] ?? ''}
         onChange={value => { setFilterValue((old: [number, number]) => [value, old?.[1]]) }
         }
-        placeholder={'Min...'}
+        placeholder={idiom.min}
       />
       <DebouncedInput
       style={{
@@ -38,7 +45,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         value={columnFilterValue?.[1] ?? ''}
         onChange={value => { setFilterValue((old: [number, number]) => [old?.[0], value]) }
         }
-        placeholder={'Max...'}
+        placeholder={idiom.max}
       />
     </>
   )
@@ -58,6 +65,8 @@ const TextInput: React.FC<TextInputProps> = ({
   setFilterValue,
   sortedUniqueValues
 }) => {
+  const { authState } = useAppSelector(state => state)
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
   const dataListId = columnId + 'list'
 
   return (
@@ -72,7 +81,7 @@ const TextInput: React.FC<TextInputProps> = ({
         type="text"
         value={columnFilterValue ?? ''}
         onChange={value => { setFilterValue(value) }}
-        placeholder={'Search...'}
+        placeholder={idiom.search}
         list={dataListId}
       />
     </>

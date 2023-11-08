@@ -11,6 +11,10 @@ export const Sbutton = styled.button`
 margin: 0 5px;
 border: none;
 background-color: transparent;
+
+svg {
+    size: 20px;
+}
 `
 
 export const Sspan = styled.span`

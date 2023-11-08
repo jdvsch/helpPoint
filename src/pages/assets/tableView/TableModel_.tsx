@@ -2,7 +2,9 @@ import { type ColumnDef } from '@tanstack/react-table'
 import IndeterminateCheckbox from '../../../components/table/checkBox/InderterminateCheckbox'
 import { type equipmentInterface } from '../../../fakeAPIdata/assetTable'
 
-export const equipmentModel: Array<ColumnDef<equipmentInterface>> = [
+import { language } from './language'
+
+export const equipmentEnModel: Array<ColumnDef<equipmentInterface>> = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -22,7 +24,7 @@ export const equipmentModel: Array<ColumnDef<equipmentInterface>> = [
   },
 
   {
-    header: 'equimnent',
+    header: 'equipment/machinery',
     accessorKey: 'name'
   },
   {
@@ -34,20 +36,12 @@ export const equipmentModel: Array<ColumnDef<equipmentInterface>> = [
     accessorKey: 'make'
   },
   {
-    header: 'model: ',
-    accessorKey: 'model: '
+    header: 'model',
+    accessorKey: 'model'
   },
   {
     header: 'serial number',
     accessorKey: 'serialNumber'
-  },
-  {
-    header: 'extra1',
-    accessorKey: 'extra1'
-  },
-  {
-    header: 'extra2',
-    accessorKey: 'extra2'
   },
   {
     header: 'priority',
@@ -82,3 +76,25 @@ export const equipmentModel: Array<ColumnDef<equipmentInterface>> = [
     accessorKey: 'note'
   }
 ]
+
+const equipmentEsModel: Array<ColumnDef<equipmentInterface>> = [
+  {
+    id: 'select',
+    header: ({ table }) => (
+      <IndeterminateCheckbox
+        checked={table.getIsAllRowsSelected()}
+        indeterminate={table.getIsSomeRowsSelected()}
+        onChange={table.getToggleAllRowsSelectedHandler()}
+      />
+    ),
+    cell: ({ row }) => (
+      <IndeterminateCheckbox
+        checked={row.getIsSelected()}
+        indeterminate={row.getIsSomeSelected()}
+        onChange={row.getToggleSelectedHandler()}
+      />
+    )
+  }
+]
+
+export const aaa = [...equipmentEsModel, ...language.Español]

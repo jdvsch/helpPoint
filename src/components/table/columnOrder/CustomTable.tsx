@@ -1,5 +1,4 @@
 /* eslint-disable multiline-ternary */
-import React from 'react'
 import { Sth, ColumnName, Resizer, Str, Std } from './styles'
 import { TbArrowBigUpLineFilled, TbArrowBigDownLineFilled } from 'react-icons/tb'
 
@@ -30,9 +29,9 @@ export default function CustomTable<T extends RowData> ({
   const handleclick = (rowId: string, cellData: Cell<T, unknown>) => {
     if (cellData.column.id !== 'select') {
       // call the page with data
-      dispatch(setViewPageControl({ mainCategory: 'allAssets', subcategory: 'generalInfo', idToEdit: cellData.row.original }))
+      dispatch(setViewPageControl({ submenuOptionsSelected: 'generalInfo', idToEdit: cellData.row.original }))
       // console.log(cellData.column.id)
-      // console.log(cellData.row.original)
+      console.log(cellData.row.original)
       // console.log(rowId)
     }
   }
@@ -42,7 +41,7 @@ export default function CustomTable<T extends RowData> ({
       <thead>
         {first.map(headerGroup => (
           <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header, i) => (
+            {headerGroup.headers.map(header => (
               <Sth
                 key={header.id}
                 Width={header.getSize().toString() + 'px'}

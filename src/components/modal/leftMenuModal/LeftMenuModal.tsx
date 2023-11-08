@@ -4,7 +4,7 @@ import helpPOint from '../../../images/helpPoint.png'
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
-import { setAccessPermits, setViewPageControl } from '../../../redux/slices/authState'
+import { setViewPageControl } from '../../../redux/slices/authState'
 
 import SingOut from '../../singOut/SingOut'
 
@@ -14,13 +14,22 @@ export default function LeftMenuModal () {
 
   const menuData = authState.accessPermits.menuOptions
   const idiom = language[authState.globalStatus.language as keyof typeof language]
+  const path = language['Access' as keyof typeof language]
   const navigate = useNavigate()
 
   const goToPage = (data: string) => {
-    // console.log(data)
-    navigate(data)
-    dispatch(setAccessPermits({ initialState: false, selected: data }))
-    dispatch(setViewPageControl({ mainCategory: data, subcategory: 'tableView' }))
+    if (authState.viewPageControl.isDirthy) {
+      // save before leave
+    } else {
+      navigate(data)
+      dispatch(setViewPageControl({
+        menuOptionSelected: data,
+        submenuOptionsSelected: language.subcomponent[data as keyof typeof language.subcomponent],
+        tableColumns: '',
+        tableData: '',
+        viewLeftMenuModal: false
+      }))
+    }
   }
 
   const closeLeftMenu = () => {
@@ -34,8 +43,8 @@ export default function LeftMenuModal () {
 
         {menuData.map((data) => (
           <Button
-            key={data}
-            onClick={() => { goToPage(idiom.path[data]) }}>{idiom.label[data]}
+            key={data} onClick={() => { goToPage(path[data as keyof typeof path]) }}>
+              {idiom[data as keyof typeof idiom]}
           </Button>
         ))}
       </Menu>

@@ -23,13 +23,14 @@ import RightMenuModal from '../modal/rightMenuModal/RightMenuModal'
 
 interface tableType<T> {
   tableData: T[]
-  columns: Array<ColumnDef<T, any>>
+  tableColumns: Array<ColumnDef<T, any>>
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export default function Table<T extends {}> ({ tableData, columns }: tableType<T>) {
+export default function Table<T extends {}> ({ tableData, tableColumns }: tableType<T>) {
   const [showModal, setShowModal] = React.useState(false)
   const [data] = React.useState(tableData)
+  const [columns] = React.useState(tableColumns)
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

@@ -1,6 +1,8 @@
 import { Main, Sbutton, Sspan, Sinput, Sselect } from './styles'
+import { language } from './language'
 
 import { type RowData, type RowModel } from '@tanstack/react-table'
+import { useAppSelector } from '../../../hooks/redux'
 
 import {
   TbSquareRoundedChevronsLeftFilled,
@@ -36,37 +38,42 @@ export function Pagination<T extends RowData> ({
   setPageIndex,
   setPageSize
 }: Props<T>) {
+  const { authState } = useAppSelector(state => state)
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
+
+  const rangePagination = [...new Set([10, 20, 30, 40, 50].concat([authState.globalStatus.tableRowSize]))].sort(function (a, b) { return a - b })
+
   return (
     <Main>
       <Sbutton
         onClick={() => { setPageIndex(0) }}
         disabled={!hasPreviousPage}
       >
-        <TbSquareRoundedChevronsLeftFilled size='20px'/>
+        <TbSquareRoundedChevronsLeftFilled />
       </Sbutton>
       <Sbutton
         onClick={() => { previousPage() }}
         disabled={!hasPreviousPage}
       >
-        <TbSquareRoundedChevronLeftFilled size='20px'/>
+        <TbSquareRoundedChevronLeftFilled />
       </Sbutton>
       <Sspan>
-        Page <strong> {pageIndex + 1} of {pageCount} </strong>
+        {idiom.page} <strong> {pageIndex + 1} {idiom.of} {pageCount} </strong>
       </Sspan>
       <Sbutton
         onClick={() => { nextPage() }}
         disabled={!hasNextPage}
       >
-        <TbSquareRoundedChevronRightFilled size='20px'/>
+        <TbSquareRoundedChevronRightFilled />
       </Sbutton>
       <Sbutton
         onClick={() => { setPageIndex(pageCount - 1) }}
         disabled={!hasNextPage}
       >
-        <TbSquareRoundedChevronsRightFilled size='20px'/>
+        <TbSquareRoundedChevronsRightFilled />
       </Sbutton>
       <Sspan>
-        Go to page
+        {idiom.goToPage}
         <Sinput
           type="number"
           defaultValue={pageIndex + 1}
@@ -82,9 +89,9 @@ export function Pagination<T extends RowData> ({
           setPageSize(Number(e.target.value))
         }}
       >
-        {[10, 20, 30, 40, 50].map(pageSize => (
+        {rangePagination.map(pageSize => (
           <option key={pageSize} value={pageSize}>
-            Show {pageSize}
+            {idiom.show} {pageSize}
           </option>
         ))}
       </Sselect>

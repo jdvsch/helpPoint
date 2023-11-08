@@ -2,7 +2,7 @@ import React from 'react'
 
 import { MainDiv, LeftSide, SubmitButton, SubContainer, RightSide, Rows, HalfRows } from './styles'
 
-import { LANGUAGE } from '../../../config/language/privatePages/assets'
+import { LANGUAGE } from '../../../config/languages/privatePages/assets'
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 

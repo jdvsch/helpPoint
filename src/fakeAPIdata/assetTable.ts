@@ -1,4 +1,4 @@
-export interface locationsInterface {
+export interface BuildingsInterface {
   id: string
   address: string
   city: string
@@ -10,7 +10,7 @@ export interface locationsInterface {
   note: string
 }
 
-export const locatios: locationsInterface[] = [
+export const buildings: BuildingsInterface[] = [
   { id: 'envigado', address: 'avenida las vegas', city: 'medellin', state: 'antioquia', country: 'colombia', zipcoode: '005577', priority: 'hight', type: 'almacen', note: 'es el almacen principal junto con la sede administrativa' }
 ]
 
@@ -38,7 +38,7 @@ export const equipment: equipmentInterface[] = [
   { isPartOf: '', name: 'extrusora 02', id: 'EXT-02', make: 'JDVS Schneider electronics', model: 'jdvs02', serialNumber: 'sklajiufiojanknfsnfsdio2', extra1: '', extra2: '', priority: 'hight', type: 'extruder', group1: 'producer machines', group2: '', supplier: 'the house extruder', purchaseDate: '2023-22-12', hourOfUse: '8', note: 'extrusora para pequeñas cantidades' }
 ]
 
-export interface vehicleInterface {
+export interface vehiclesInterface {
   id: string
   make: string
   model: string
@@ -54,7 +54,7 @@ export interface vehicleInterface {
   note: string
 }
 
-export const vehicle: vehicleInterface[] = [
+export const vehicles: vehiclesInterface[] = [
   { id: 'iot425', make: 'nissan', model: 'corsa active', serialNumber: 'sajkhfjhwejasnfaj', extra1: '1600 cc', extra2: '5 pasajeros', priority: 'hight', type: 'turismo', group1: 'administrativo', group2: '', supplier: 'vehículos del sur', purchaseDate: '2017-01-01', note: 'fue un presente para la esposa' }
 ]
 

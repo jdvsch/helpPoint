@@ -30,7 +30,7 @@ export function ExcelOutput (
   const hoja = XLSX.utils.json_to_sheet([...Table], { skipHeader: true })
 
   XLSX.utils.book_append_sheet(libro, hoja, wsName)
-  XLSX.writeFile(libro, 'HelpPoint.xlsx')
+  XLSX.writeFile(libro, 'AssetsMinders.xlsx')
 }
 
 function excelColumn (n: number): string {

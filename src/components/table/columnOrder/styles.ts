@@ -11,6 +11,7 @@ export const Sth = styled.th<Props>`
     border-bottom: 2px solid rgba(0, 0, 0, 0.3);
     user-select: none;
     width: ${props => props.Width};
+    white-space: nowrap;
 
     &.select{
         display: flex;

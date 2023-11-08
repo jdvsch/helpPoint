@@ -15,7 +15,34 @@ export const userSettup = {
     submenuOptions: {
       assets: {
         locations: ['todas', 'sede 1', 'sede 2'],
-        assets: ['Buildings', 'equipment/machinery', 'tools', 'spare and parts', 'vehicles'],
+        assets: ['Buildings', 'equipment / machinery', 'tools', 'spare and parts', 'vehicles'],
+        tableControl: {
+          Buildings: {
+            name: 'Buildings',
+            tableColumns: '',
+            tableData: ''
+          },
+          equipment: {
+            name: 'equipment / machinery',
+            tableColumns: '',
+            tableData: ''
+          },
+          tools: {
+            name: 'tools',
+            tableColumns: '',
+            tableData: ''
+          },
+          spare: {
+            name: 'spare and parts',
+            tableColumns: '',
+            tableData: ''
+          },
+          vehicles: {
+            name: 'vehicles',
+            tableColumns: '',
+            tableData: ''
+          }
+        },
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       inHousePersonnel: {

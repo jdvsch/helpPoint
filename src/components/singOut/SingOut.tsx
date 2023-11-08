@@ -10,8 +10,8 @@ export default function SingOut () {
 
   const handleSingOut = () => {
     signOut(authFirebase).then(() => {
-      dispatch(setGlobalStatus({ logged: false, language: 'English', theme: 'light', token: '', user: '' }))
-      dispatch(setAccessPermits({ menuOptions: [], menuOptionSelected: '', submenuOptions: {} }))
+      dispatch(setGlobalStatus({ companyName: '', language: 'English', tableRowSize: 10, theme: 'light', token: '', user: '', windowWidth: 0 }))
+      dispatch(setAccessPermits({ menuOptions: [], menuOptionDefault: '', submenuOptions: {} }))
     })
       .catch(err => {
         console.log('error')

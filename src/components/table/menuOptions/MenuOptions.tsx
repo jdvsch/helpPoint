@@ -3,9 +3,10 @@ import { BsQrCode, BsDatabaseFillAdd } from 'react-icons/bs'
 import { RiFileExcel2Fill, RiTableFill } from 'react-icons/ri'
 import { FaClone } from 'react-icons/fa'
 import { FaFilePdf } from 'react-icons/fa6'
+import { language } from './language'
 
 import { type RowData, type Table } from '@tanstack/react-table'
-import { useAppDispatch } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { setFeedbackModal } from '../../../redux/slices/authState'
 import { ExcelOutput } from '../exportToExcel/ExcelOutput'
 
@@ -27,6 +28,11 @@ export default function MenuOptions<T extends RowData> ({
   table, showModal, setShowModal
 }: Props<T>) {
   const dispatch = useAppDispatch()
+  const { authState } = useAppSelector(state => state)
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
+  const menuOptionSelected = authState.viewPageControl.menuOptionSelected
+  const locationSelect = authState.accessPermits.submenuOptions[menuOptionSelected].locations
+  const typeOfRecord = authState.accessPermits.submenuOptions[menuOptionSelected].assets
 
   // HANDLE A NEW ENTRY ON DATABASE
   const createNewEntry = () => {
@@ -45,7 +51,7 @@ export default function MenuOptions<T extends RowData> ({
       return dispatch(setFeedbackModal({
         initialState: true,
         type: 'warning',
-        message: 'you shoud atleast choice one divice'
+        message: idiom.warning
       }))
     }
 
@@ -85,49 +91,49 @@ export default function MenuOptions<T extends RowData> ({
     <MainDiv>
       <LeftMenu>
         <Sselect>
-          <option key={1} value={1}>todas las sedes</option>
-          <option key={2} value={1}>sede 1</option>
-          <option key={3} value={2}>sede 2</option>
+          {locationSelect.map(data => (
+            <option key={data} value={data}>{data}</option>
+          ))
+          }
         </Sselect>
 
         <Sselect>
-          <option key={2} value={2}>asset</option>
-          <option key={1} value={1}>location</option>
-          <option key={3} value={3}>tool</option>
-          <option key={5} value={5}>spare</option>
-          <option key={4} value={4}>vehicle</option>
+          {typeOfRecord.map(data => (
+              <option key={data} value={data}>{data}</option>
+          ))
+          }
         </Sselect>
       </LeftMenu>
 
       <RightMenu>
         <Sbutton bgColor={'green'} onClick={createNewEntry}>
           <BsDatabaseFillAdd />
-          <Sspan Right={'0'}>Create a new asset</Sspan>
+          <Sspan Right={'0'}>{idiom.DatabaseAdd}</Sspan>
         </Sbutton>
 
         <Sbutton bgColor={'blue'} Color={'black'} onClick={showHideColumns}>
           <RiTableFill />
-          <Sspan Right={'0'}>Show or hide columns</Sspan>
+          <Sspan Right={'0'}>{idiom.showHideColumns}</Sspan>
         </Sbutton>
 
         <Sbutton bgColor={'green'} Color={'black'} onClick={exportDataExcel}>
           <RiFileExcel2Fill />
-          <Sspan Right={'0'}>Export to excel</Sspan>
+          <Sspan Right={'0'}>{idiom.exportExcel}</Sspan>
         </Sbutton>
 
         <Sbutton bgColor={'orange'} Color={'black'} onClick={printQRcode}>
           <BsQrCode />
-          <Sspan Right={'0'}>Print QR code</Sspan>
+          <Sspan Right={'0'}>{idiom.printQRcode}</Sspan>
         </Sbutton>
 
         <Sbutton bgColor={'lightblue'} Color={'black'} onClick={cloneRegister}>
           <FaClone />
-          <Sspan Right={'0'}>Clone asset</Sspan>
+          <Sspan Right={'0'}>{idiom.cloneRecord}</Sspan>
         </Sbutton>
 
         <Sbutton bgColor={'red'} Color={'black'} onClick={printPDF}>
           <FaFilePdf />
-          <Sspan Right={'0'}>Print a PDF document</Sspan>
+          <Sspan Right={'0'}>{idiom.printPDF}</Sspan>
         </Sbutton>
       </RightMenu>
     </MainDiv>

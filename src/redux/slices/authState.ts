@@ -6,7 +6,7 @@ export interface AuthState {
   globalStatus: { companyName: string, language: string, tableRowSize: number, theme: string, token: string, user: string, windowWidth: number }
   loader: { loading: boolean, error: string }
   publicWebPage: { language: string }
-  viewPageControl: { viewLeftMenuModal: boolean, menuOptionSelected: string, submenuOptionsSelected: string, idToEdit: Record<string, unknown> }
+  viewPageControl: { idToEdit: Record<string, unknown>, isDirthy: boolean, menuOptionSelected: string, showHideSaveModal: boolean, submenuOptionsSelected: string, tableColumns: string, tableData: string, viewLeftMenuModal: boolean }
 }
 
 const initialState: AuthState = {
@@ -15,7 +15,7 @@ const initialState: AuthState = {
   globalStatus: { companyName: '', language: 'English', tableRowSize: 10, theme: 'light', token: '', user: '', windowWidth: 0 },
   loader: { loading: false, error: '' },
   publicWebPage: { language: 'English' },
-  viewPageControl: { viewLeftMenuModal: false, menuOptionSelected: '', submenuOptionsSelected: '', idToEdit: {} }
+  viewPageControl: { idToEdit: {}, isDirthy: false, menuOptionSelected: '', showHideSaveModal: false, submenuOptionsSelected: '', tableColumns: '', tableData: '', viewLeftMenuModal: false }
 }
 
 const authSlice = createSlice({
