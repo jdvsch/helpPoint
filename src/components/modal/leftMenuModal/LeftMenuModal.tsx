@@ -23,10 +23,10 @@ export default function LeftMenuModal () {
     } else {
       navigate(data)
       dispatch(setViewPageControl({
-        menuOptionSelected: data,
-        submenuOptionsSelected: language.subcomponent[data as keyof typeof language.subcomponent],
-        tableColumns: '',
-        tableData: '',
+        activeHeadquarters: authState.accessPermits.submenuOptions[data].locations[0],
+        menuOptionsSelected: data,
+        viewControl: language.subcomponent[data as keyof typeof language.subcomponent],
+        tableDefaultToRender: Object.keys(authState.accessPermits.submenuOptions[data].menuAndAPI)[0],
         viewLeftMenuModal: false
       }))
     }

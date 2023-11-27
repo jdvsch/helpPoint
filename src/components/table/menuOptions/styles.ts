@@ -43,7 +43,6 @@ export const Sbutton = styled.button<Props>`
   }
 
   &:hover span{
-    top: 120%;
     visibility: visible;
     opacity: 1;
     z-index: 1;
@@ -53,6 +52,7 @@ export const Sbutton = styled.button<Props>`
 export const Sspan = styled.span<Props>`
   position: absolute;
   font-size: 12px;
+  top: 120%;
   left: ${props => props.Left};
   right: ${props => props.Right};
   background-color: ${({ theme }) => theme.text5};

@@ -1,8 +1,12 @@
-import { DragDrop, Paragraph, Image, Button } from './styles'
+import { DragDrop, Paragraph, Image, ImageDiv, Button } from './styles'
+import { language } from './language'
 
 import React from 'react'
 import { useDropzone } from 'react-dropzone'
-import { BiCameraOff } from 'react-icons/bi'
+import { MdDeleteForever } from 'react-icons/md'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { setFeedbackModal } from '../../../redux/slices/authState'
+import DeleteConfirmation from '../../modal/deleteConfirmation/DeleteConfirmation'
 
 interface File {
   lastModified: number
@@ -15,7 +19,11 @@ interface File {
 }
 
 export default function DropImage () {
+  const { authState } = useAppSelector(state => state)
+  const dispatch = useAppDispatch()
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
   const [imageFiles, setImageFiles] = React.useState<File[]>([])
+  const [deleteConfirmation, setDeleteConfirmation] = React.useState(false)
 
   const {
     acceptedFiles,
@@ -39,9 +47,6 @@ export default function DropImage () {
     }
   })
 
-  const acceptedFileItems = acceptedFiles.length
-  const fileRejectionItems = fileRejections.length
-
   const fileAtScreen = imageFiles?.map((file, index) => (
     <Image key={index} src={file.preview} alt="" />
   ))
@@ -51,8 +56,18 @@ export default function DropImage () {
     return () => { imageFiles.forEach((file) => { URL.revokeObjectURL(file.preview) }) }
   }, [])
 
+  React.useEffect(() => {
+    (acceptedFiles.length === 0 && fileRejections.length !== 0) &&
+    dispatch(setFeedbackModal({
+      initialState: true,
+      type: 'warning',
+      message: idiom.warning
+    }))
+  }, [acceptedFiles, fileRejections])
+
   const getNewImage = () => {
-    setImageFiles([])
+    setDeleteConfirmation(true)
+    // setImageFiles([])
   }
 
   return (
@@ -61,18 +76,17 @@ export default function DropImage () {
       ? <>
       <DragDrop {...getRootProps()}>
         <input {...getInputProps()} />
-        <Paragraph>DnD or click here</Paragraph>
-        <Paragraph>Only one image will be accepted</Paragraph>
-      </DragDrop>
-      {(acceptedFileItems === 0 && fileRejectionItems !== 0) &&
-        <Paragraph>Just one image (jpeg or png) can be upload</Paragraph>
-      }
-    </>
+        <Paragraph>{idiom.DnD}</Paragraph>
+        <Paragraph>{idiom.quantity}</Paragraph>
+      </DragDrop> </>
       : <>
-      { fileAtScreen }
-      <Button onClick={getNewImage}>
-        <BiCameraOff />
-      </Button>
+      {deleteConfirmation && <DeleteConfirmation />}
+      <ImageDiv>
+        { fileAtScreen }
+        <Button onClick={getNewImage}>
+          <MdDeleteForever />
+        </Button>
+      </ImageDiv>
       </>
     }
     </>

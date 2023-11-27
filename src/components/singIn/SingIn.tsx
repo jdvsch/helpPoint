@@ -8,7 +8,7 @@ import helpPOint from '../../images/helpPoint.png'
 import React from 'react'
 import { language } from './language'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { setGlobalStatus, setAccessPermits, setLoader } from '../../redux/slices/authState'
+import { setGlobalStatus, setAccessPermits, setViewPageControl, setLoader } from '../../redux/slices/authState'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authFirebase } from '../../firebase/firebase'
@@ -61,6 +61,7 @@ export default function SignIn () {
         // estos datos deben de venir de la API
         dispatch(setGlobalStatus(userSettup.GlobalStatus))
         dispatch(setAccessPermits(userSettup.accessPermits))
+        dispatch(setViewPageControl(userSettup.viewPageControl))
       })
       .catch(() => {
         // console.log(err.code)

@@ -7,65 +7,58 @@ export const userSettup = {
     token: '',
     user: 'userCredential.user.uid',
     windowWidth: window.innerWidth,
-    tableRowSize: 5
+    tableRowSize: 13
   },
   accessPermits: {
     menuOptions: ['dashboard', 'assets', 'workManament', 'warehouses', 'inhousePersonnel', 'suppliers', 'setting', 'help'],
-    menuOptionSelected: 'dashboard',
     submenuOptions: {
+      dashboard: {
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        menuAndAPI: { dashboard: 'dashboard' },
+        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
       assets: {
-        locations: ['todas', 'sede 1', 'sede 2'],
-        assets: ['Buildings', 'equipment / machinery', 'tools', 'spare and parts', 'vehicles'],
-        tableControl: {
-          Buildings: {
-            name: 'Buildings',
-            tableColumns: '',
-            tableData: ''
-          },
-          equipment: {
-            name: 'equipment / machinery',
-            tableColumns: '',
-            tableData: ''
-          },
-          tools: {
-            name: 'tools',
-            tableColumns: '',
-            tableData: ''
-          },
-          spare: {
-            name: 'spare and parts',
-            tableColumns: '',
-            tableData: ''
-          },
-          vehicles: {
-            name: 'vehicles',
-            tableColumns: '',
-            tableData: ''
-          }
-        },
-        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
-      },
-      inHousePersonnel: {
-        locations: ['todas', 'sede 1', 'sede 2'],
-        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
-      },
-      setting: {
-        locations: ['todas', 'sede 1', 'sede 2'],
-        assets: ['myConfiguration', 'configurationoOtherUsers'],
-        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
-      },
-      suppliers: {
-        locations: ['todas', 'sede 1', 'sede 2'],
-        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
-      },
-      warehouses: {
-        locations: ['todas', 'sede 1', 'sede 2'],
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        menuAndAPI: { buildings: 'buildings', equipment: 'equipment / machinery', tools: 'tools', spare: 'spare and parts', vehicles: 'vehicles' },
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       workmanament: {
-        locations: ['todas', 'sede 1', 'sede 2'],
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        workmanament: ['', '', '', '', ''],
+        nameTableAPI: ['', '', '', '', ''],
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
+      warehouses: {
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        warehouses: ['', '', '', '', ''],
+        nameTableAPI: ['', '', '', '', ''],
+        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
+      inhousePersonnel: {
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        inhousePersonnel: ['', '', '', '', ''],
+        nameTableAPI: ['', '', '', '', ''],
+        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
+      suppliers: {
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        suppliers: ['', '', '', '', ''],
+        nameTableAPI: ['', '', '', '', ''],
+        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
+      setting: {
+        locations: ['allLocations', 'sede 1', 'sede 2'],
+        setting: ['my setting', 'setting others user', '', '', ''],
+        nameTableAPI: ['', '', '', '', ''],
+        writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
+      },
+      help: {
       }
     }
+  },
+  viewPageControl: {
+    activeHeadquarters: 'allLocations',
+    menuOptionDefault: 'dashboard'
   }
+
 }

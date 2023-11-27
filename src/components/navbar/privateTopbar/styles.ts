@@ -43,3 +43,7 @@ color: ${({ theme }) => theme.primary};
 export const PathName = styled.span`
 color: ${({ theme }) => theme.primary};
 `
+
+export const PathType = styled.span`
+color: ${({ theme }) => theme.primary};
+`

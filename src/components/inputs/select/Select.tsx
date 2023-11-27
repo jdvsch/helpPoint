@@ -5,10 +5,9 @@ interface Props {
   Placeholder: string
   Disable?: boolean
   Error?: string | undefined
+  defaultValue?: string
   selectOptions: Array<{
-    id: string | number
     value: string
-    defaultValue?: string
   }>
 }
 
@@ -22,7 +21,7 @@ export default function Select ({ Register, Placeholder, Disable = false, Error 
         id={Register.name}
       >
         {selectOptions.map(data => (
-        <option key={data.id} value={data.id} >{data.value}</option>
+        <option key={data.value} value={data.value} >{data.value}</option>
         ))}
       </SelectOptions>
       {Boolean(Error).valueOf()

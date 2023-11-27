@@ -1,23 +1,32 @@
 import styled from 'styled-components'
 
-export const MainDiv = styled.div`
-height: 100%;
-width: 100%;
-display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-align-items: center;
-`
-
-export const QR = styled.div`
-height: 20px;
-width: 20px;
-`
-
 export const Button = styled.button`
-font-size: 35px;
-color: ${({ theme }) => theme.text};
-border: none;
-background-color: transparent;
+height: auto;
+width: auto;
+
+position: relative;
 cursor: pointer;
+border: none;
+background-color: ${({ theme }) => theme.bg5};
+
+&:hover span{
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+  }
+`
+
+export const Span = styled.span`
+position: absolute;
+top: 100%;
+right: 0;
+font-size: 12px;
+background-color: ${({ theme }) => theme.text5};
+color: ${({ theme }) => theme.bg1};
+white-space: nowrap;
+padding: 5px;
+border-radius: 5px;
+visibility: hidden;
+opacity: 0;
+transition: opacity 0.5s ease;
 `

@@ -10,6 +10,7 @@ import {
   TbSquareRoundedChevronsRightFilled,
   TbSquareRoundedChevronRightFilled
 } from 'react-icons/tb'
+import React from 'react'
 
 interface Props<T extends RowData> {
   getSelectedRowModel: () => RowModel<T>
@@ -42,6 +43,10 @@ export function Pagination<T extends RowData> ({
   const idiom = language[authState.globalStatus.language as keyof typeof language]
 
   const rangePagination = [...new Set([10, 20, 30, 40, 50].concat([authState.globalStatus.tableRowSize]))].sort(function (a, b) { return a - b })
+
+  React.useEffect(() => {
+    setPageSize(authState.globalStatus.tableRowSize)
+  }, [])
 
   return (
     <Main>

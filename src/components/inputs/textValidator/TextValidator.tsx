@@ -1,28 +1,36 @@
+// fakeAPI
+import { building } from '../../../fakeAPIdata/assets'
+import { language } from './language'
+
 import { MainDiv, InputLabel, Input, ErrorMessage } from './styles'
+
+import { useAppSelector } from '../../../hooks/redux'
 
 import React from 'react'
 
 interface Props {
-  Register: any
-  Placeholder: string
+  API: string
   Disable?: boolean
+  Placeholder: string
+  Register: any
   setIsCodeUnique: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function TextValidator ({ Register, Placeholder, setIsCodeUnique }: Props) {
+export default function TextValidator ({ API, Disable = false, Placeholder, Register, setIsCodeUnique }: Props) {
+  const { authState } = useAppSelector(state => state)
+  const idiom = language[authState.globalStatus.language as keyof typeof language]
   const [Error, setError] = React.useState('')
 
   const checkData = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    // console.log(e.target.value)
     if (e.target.value !== '') {
-      // aqui ejecuto la busqueda en la base de datos de esa referencia, de ser positiva se agrega
-      if (true) {
+      // aqui ejecuto la busqueda en la base de datos de esa referencia usando API, de ser positiva se agrega
+      if (building.includes(e.target.value)) {
+        setIsCodeUnique(false)
+        setError(idiom.warning)
+      } else {
         setIsCodeUnique(true)
+        setError('')
       }
-      // setError('error message')
-    } else {
-      setIsCodeUnique(false)
-      setError('')
     }
   }
 
@@ -38,11 +46,9 @@ export default function TextValidator ({ Register, Placeholder, setIsCodeUnique 
         name={name}
         onBlur={checkData}
         id={Register.name}
+        disabled={Disable}
       />
-      {Boolean(Error).valueOf()
-        ? <ErrorMessage>{ Error }</ErrorMessage>
-        : <ErrorMessage>{ ' ' }</ErrorMessage>
-      }
+      {Boolean(Error).valueOf() && <ErrorMessage>{ Error }</ErrorMessage> }
     </MainDiv>
   )
 }

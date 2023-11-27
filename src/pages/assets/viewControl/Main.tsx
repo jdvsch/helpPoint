@@ -1,21 +1,24 @@
 import { MainDiv } from './styles'
 import { useAppSelector } from '../../../hooks/redux'
 
-import Attachments from '../attachments/Main'
-import CustomInfo from '../customInfo/Main'
+import Attachments from '../attachments/Attachments'
+import Assets from '../assetsForm/Assets'
+import CustomInfo from '../customInfo/CustomInfo'
 import GeneralInfo from '../generalInfo/Main'
-import Historical from '../historical/Main'
-import SparePartsAndSupplies from '../sparePartsAndSupplies/Main'
+import Historical from '../historical/Historical'
+import SparePartsAndSupplies from '../sparePartsAndSupplies/SparePartsAndSupplies'
 import TableView from '../tableView/Main'
-import ThirdParties from '../thirdParties/Main'
+import ThirdParties from '../thirdParties/ThirdParties'
+
+import GeneralInfo2 from '../buildings/GeneralInfo'
 
 export default function Main () {
   const { authState } = useAppSelector(state => state)
-  const viewController = authState.viewPageControl.submenuOptionsSelected
+  const viewController = authState.viewPageControl.viewControl
   const selectPageToRender = {
     attachments: Attachments,
     customInfo: CustomInfo,
-    generalInfo: GeneralInfo,
+    generalInfo: Assets,
     historical: Historical,
     sparePartsAndSupplies: SparePartsAndSupplies,
     tableView: TableView,

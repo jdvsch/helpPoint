@@ -26,10 +26,10 @@ export default function CustomTable<T extends RowData> ({
 
   const dispatch = useAppDispatch()
 
-  const handleclick = (rowId: string, cellData: Cell<T, unknown>) => {
+  const editViewRecord = (rowId: string, cellData: Cell<T, unknown>) => {
     if (cellData.column.id !== 'select') {
       // call the page with data
-      dispatch(setViewPageControl({ submenuOptionsSelected: 'generalInfo', idToEdit: cellData.row.original }))
+      dispatch(setViewPageControl({ viewControl: 'generalInfo', idToEdit: cellData.row.original }))
       // console.log(cellData.column.id)
       console.log(cellData.row.original)
       // console.log(rowId)
@@ -88,7 +88,7 @@ export default function CustomTable<T extends RowData> ({
             {row.getVisibleCells().map(cell => (
               <Std
                 className={cell.column.id === 'select' ? 'checkbox' : 'noCheckbox'}
-                onClick={() => { handleclick(row.id, cell) }}
+                onClick={() => { editViewRecord(row.id, cell) }}
                 key={cell.id}
                 style={{ maxWidth: cell.column.getSize() }}
               >

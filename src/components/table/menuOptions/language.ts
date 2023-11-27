@@ -1,5 +1,6 @@
 export const language = {
   English: {
+    allLocations: 'all locations',
     warning: 'you must choose at least one record',
     DatabaseAdd: 'Create a new record',
     showHideColumns: 'Show or hide columns',
@@ -9,6 +10,7 @@ export const language = {
     printPDF: 'Print a PDF document'
   },
   Español: {
+    allLocations: 'todas las sedes',
     warning: 'debe elegir por lo menos un registro',
     DatabaseAdd: 'Crear un nuevo registro',
     showHideColumns: 'Mostrar u ocultar columnas',

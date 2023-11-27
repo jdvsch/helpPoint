@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import DropImage from '../../../components/dropImage/DropImage'
+import DropImage from '../../../components/inputs/dropImage/DropImage'
 import QrCode from '../../../components/qrCode/QrCode'
 import Date from '../../../components/inputs/date/Date'
 import TextValidator from '../../../components/inputs/textValidator/TextValidator'
@@ -87,6 +87,7 @@ export default function Main () {
         </HalfRows>
         <Rows>
           <TextValidator {...{
+            API: '',
             Register: register('code'),
             Placeholder: infoInputs.generalAssetsInputs.code,
             setIsCodeUnique

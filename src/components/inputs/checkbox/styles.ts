@@ -5,12 +5,12 @@ display: flex;
 flex-direction: column;
 height: auto;
 width: 100%;
-margin: 0 15px;
 `
 
 export const InputLabel = styled.label`
 height: 25%;
 font-size: 12px;
+user-select: none;
 `
 
 export const Input = styled.input`

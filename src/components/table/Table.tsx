@@ -29,8 +29,8 @@ interface tableType<T> {
 // eslint-disable-next-line @typescript-eslint/ban-types
 export default function Table<T extends {}> ({ tableData, tableColumns }: tableType<T>) {
   const [showModal, setShowModal] = React.useState(false)
-  const [data] = React.useState(tableData)
-  const [columns] = React.useState(tableColumns)
+  const [data, setData] = React.useState(tableData)
+  const [columns, setColumns] = React.useState(tableColumns)
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -72,6 +72,11 @@ export default function Table<T extends {}> ({ tableData, tableColumns }: tableT
       }
     }
   }, [table.getState().columnFilters[0]?.id])
+
+  React.useEffect(() => {
+    setData(tableData)
+    setColumns(tableColumns)
+  }, [tableData, tableColumns])
 
   return (
     <MainDiv>

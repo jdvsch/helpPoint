@@ -7,7 +7,7 @@ import { language } from './language'
 
 import { type RowData, type Table } from '@tanstack/react-table'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { setFeedbackModal } from '../../../redux/slices/authState'
+import { setFeedbackModal, setViewPageControl } from '../../../redux/slices/authState'
 import { ExcelOutput } from '../exportToExcel/ExcelOutput'
 
 interface Props<T extends RowData> {
@@ -18,11 +18,11 @@ interface Props<T extends RowData> {
 
 interface Headers {
   header: string
-}[]
+}
 
 interface ExcelData {
   id?: string
-}[]
+}
 
 export default function MenuOptions<T extends RowData> ({
   table, showModal, setShowModal
@@ -30,9 +30,21 @@ export default function MenuOptions<T extends RowData> ({
   const dispatch = useAppDispatch()
   const { authState } = useAppSelector(state => state)
   const idiom = language[authState.globalStatus.language as keyof typeof language]
-  const menuOptionSelected = authState.viewPageControl.menuOptionSelected
+  const menuOptionSelected = authState.viewPageControl.menuOptionsSelected
   const locationSelect = authState.accessPermits.submenuOptions[menuOptionSelected].locations
-  const typeOfRecord = authState.accessPermits.submenuOptions[menuOptionSelected].assets
+  // const typeOfRecord = authState.accessPermits.submenuOptions[menuOptionSelected].assets
+  const typeOfRecord = Object.entries(authState.accessPermits.submenuOptions[menuOptionSelected].menuAndAPI)
+  const selectetion = authState.viewPageControl.tableDefaultToRender
+
+  // HANDLE LOCATION TO SHOW
+  const changingLocation = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setViewPageControl({ activeHeadquarters: e.target.value }))
+  }
+
+  // HANDLE DATA TO SHOW ON TABLE
+  const changingDataToShow = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setViewPageControl({ tableDefaultToRender: e.target.value }))
+  }
 
   // HANDLE A NEW ENTRY ON DATABASE
   const createNewEntry = () => {
@@ -90,16 +102,16 @@ export default function MenuOptions<T extends RowData> ({
   return (
     <MainDiv>
       <LeftMenu>
-        <Sselect>
-          {locationSelect.map(data => (
-            <option key={data} value={data}>{data}</option>
+        <Sselect onChange={(e) => { changingLocation(e) }}>
+          {locationSelect.map((data: string, i: number) => (
+            <option key={i} value={data}>{data === 'allLocations' ? idiom.allLocations : data}</option>
           ))
           }
         </Sselect>
 
-        <Sselect>
-          {typeOfRecord.map(data => (
-              <option key={data} value={data}>{data}</option>
+        <Sselect onChange={(e) => { changingDataToShow(e) }} defaultValue={selectetion}>
+          {typeOfRecord.map((data: any[], i: number) => (
+            <option key={i} value={data[0]}>{data[1]}</option>
           ))
           }
         </Sselect>
