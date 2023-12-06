@@ -15,7 +15,7 @@ import PrivateTopbar from './components/navbar/privateTopbar/PrivateTopbar'
 import ProtectedRoute from './config/routes/ProtectedRoute'
 import PublicTopbar from './components/navbar/publicTopbar/PublicTopbar'
 
-import Assets from './pages/assets/viewControl/Main'
+import AssetsViewControl from './pages/assets/assetsViewControl/AssetsViewControl'
 import Dashboard from './pages/dashboard/Dashboard'
 import Help from './pages/help/Help'
 import Home from './pages/home/Home'
@@ -44,7 +44,7 @@ export default function App () {
   }, [])
 
   const ProtectedRouteOptions = {
-    assets: <Route key={'assets'} path='/assets' element={<Assets />} />,
+    assets: <Route key={'assets'} path='/assets' element={<AssetsViewControl />} />,
     dashboard: <Route key={'dashboard'} path='/dashboard' element={<Dashboard />} />,
     help: <Route key={'help'} path='/help' element={<Help />} />,
     inhousePersonnel: <Route key={'personnel'} path='/personnel' element={<Personnel />} />,

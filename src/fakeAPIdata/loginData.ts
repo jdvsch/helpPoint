@@ -10,44 +10,38 @@ export const userSettup = {
     tableRowSize: 13
   },
   accessPermits: {
+    locations: ['allLocations', 'sede 1', 'sede 2'],
     menuOptions: ['dashboard', 'assets', 'workManament', 'warehouses', 'inhousePersonnel', 'suppliers', 'setting', 'help'],
     submenuOptions: {
       dashboard: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
-        menuAndAPI: { dashboard: 'dashboard' },
+        mainSelectTable: { dashboard: 'dashboard' },
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       assets: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
-        menuAndAPI: { buildings: 'buildings', equipment: 'equipment / machinery', tools: 'tools', spare: 'spare and parts', vehicles: 'vehicles' },
+        mainSelectTable: { buildings: 'buildings', equipment: 'equipment / machinery', tools: 'tools', spareParts: 'spare parts and supplies', vehicles: 'vehicles' },
+        viewControl: 'tableView',
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       workmanament: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
-        workmanament: ['', '', '', '', ''],
-        nameTableAPI: ['', '', '', '', ''],
+        mainSelectTable: { },
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       warehouses: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
         warehouses: ['', '', '', '', ''],
         nameTableAPI: ['', '', '', '', ''],
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       inhousePersonnel: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
         inhousePersonnel: ['', '', '', '', ''],
         nameTableAPI: ['', '', '', '', ''],
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       suppliers: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
         suppliers: ['', '', '', '', ''],
         nameTableAPI: ['', '', '', '', ''],
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
       },
       setting: {
-        locations: ['allLocations', 'sede 1', 'sede 2'],
         setting: ['my setting', 'setting others user', '', '', ''],
         nameTableAPI: ['', '', '', '', ''],
         writePermissions: 'w' // Lectura (r), Escritura (w), Ejecución (x), Sin permisos (-)
@@ -57,8 +51,8 @@ export const userSettup = {
     }
   },
   viewPageControl: {
-    activeHeadquarters: 'allLocations',
-    menuOptionDefault: 'dashboard'
+    menuOptionDefault: 'dashboard',
+    activeLocation: 'allLocations'
   }
 
 }

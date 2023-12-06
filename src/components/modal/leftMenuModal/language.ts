@@ -9,16 +9,6 @@ export const language = {
     setting: 'setting',
     help: 'help'
   },
-  subcomponent: {
-    dashboard: '',
-    assets: 'tableView',
-    workManament: '',
-    warehouses: '',
-    inhousePersonnel: '',
-    suppliers: '',
-    setting: '',
-    help: ''
-  },
   English: {
     dashboard: 'Dashboard',
     assets: 'Assets',

@@ -11,7 +11,7 @@ import Table from '../../../components/table/Table'
 import { useAppSelector } from '../../../hooks/redux'
 import { tableModel } from '../../../components/table/tabletSelectModel/TableModel'
 
-export default function Main () {
+export default function TableView () {
   const { authState } = useAppSelector(state => state)
   const tableColumnsLanguage = language[authState.globalStatus.language as keyof typeof language][authState.viewPageControl.tableDefaultToRender as keyof typeof language.English]
   const [tableData, setTableData] = React.useState([{}])

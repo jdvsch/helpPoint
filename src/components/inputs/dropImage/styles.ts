@@ -13,10 +13,16 @@ justify-content: space-evenly;
 align-items: center;
 background-color: white;
 cursor: pointer;
+
+svg{
+    font-size: 55px;
+    color: ${({ theme }) => theme.bg2};
+}
 `
 
 export const Paragraph = styled.p`
 text-align: center;
+font-weight: bold;
 `
 
 export const ImageDiv = styled.div`

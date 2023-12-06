@@ -13,7 +13,7 @@ border: none;
 background-color: transparent;
 
 svg {
-    size: 20px;
+    font-size: 21px;
 }
 `
 

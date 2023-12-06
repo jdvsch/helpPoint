@@ -1,4 +1,5 @@
 import { DragDrop, Paragraph, Image, ImageDiv, Button } from './styles'
+import { FaCloudUploadAlt } from 'react-icons/fa'
 import { language } from './language'
 
 import React from 'react'
@@ -76,8 +77,8 @@ export default function DropImage () {
       ? <>
       <DragDrop {...getRootProps()}>
         <input {...getInputProps()} />
-        <Paragraph>{idiom.DnD}</Paragraph>
-        <Paragraph>{idiom.quantity}</Paragraph>
+        <span style={{ textAlign: 'center' }}> <Paragraph>{idiom.DnD1}</Paragraph>{idiom.DnD2}</span>
+        <FaCloudUploadAlt/>
       </DragDrop> </>
       : <>
       {deleteConfirmation && <DeleteConfirmation />}

@@ -3,8 +3,6 @@ import styled from 'styled-components'
 export const MainDiv = styled.div`
 display: flex;
 flex-direction: column;
-height: auto;
-width: 100%;
 `
 
 export const InputLabel = styled.label`

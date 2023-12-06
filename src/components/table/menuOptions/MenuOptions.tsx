@@ -30,20 +30,29 @@ export default function MenuOptions<T extends RowData> ({
   const dispatch = useAppDispatch()
   const { authState } = useAppSelector(state => state)
   const idiom = language[authState.globalStatus.language as keyof typeof language]
+
+  // identifico a que locaciones tiene acceso el usurio
+  const locationSelect = authState.accessPermits.locations
+
+  // identifico que opcion del menu se eligió
   const menuOptionSelected = authState.viewPageControl.menuOptionsSelected
-  const locationSelect = authState.accessPermits.submenuOptions[menuOptionSelected].locations
-  // const typeOfRecord = authState.accessPermits.submenuOptions[menuOptionSelected].assets
-  const typeOfRecord = Object.entries(authState.accessPermits.submenuOptions[menuOptionSelected].menuAndAPI)
-  const selectetion = authState.viewPageControl.tableDefaultToRender
+
+  // recobro lo que muestro en el select principal
+  const mainSelectTable = Object.entries(authState.accessPermits.submenuOptions[menuOptionSelected].mainSelectTable)
+
+  const tableDefaultToRender = authState.viewPageControl.tableDefaultToRender
+  const activeLocation = authState.viewPageControl.activeLocation
 
   // HANDLE LOCATION TO SHOW
   const changingLocation = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setViewPageControl({ activeHeadquarters: e.target.value }))
+    dispatch(setViewPageControl({ activeLocation: e.target.value }))
   }
 
   // HANDLE DATA TO SHOW ON TABLE
   const changingDataToShow = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setViewPageControl({ tableDefaultToRender: e.target.value }))
+    dispatch(setViewPageControl({
+      tableDefaultToRender: e.target.value
+    }))
   }
 
   // HANDLE A NEW ENTRY ON DATABASE
@@ -102,19 +111,21 @@ export default function MenuOptions<T extends RowData> ({
   return (
     <MainDiv>
       <LeftMenu>
-        <Sselect onChange={(e) => { changingLocation(e) }}>
+        <Sselect onChange={(e) => { changingDataToShow(e) }} defaultValue={tableDefaultToRender}>
+          {mainSelectTable.map((data: any[], i: number) => (
+            <option key={i} value={data[0]}>{data[1]}</option>
+          ))
+          }
+        </Sselect>
+
+        {tableDefaultToRender !== 'buildings' &&
+        <Sselect onChange={(e) => { changingLocation(e) }} defaultValue={activeLocation}>
           {locationSelect.map((data: string, i: number) => (
             <option key={i} value={data}>{data === 'allLocations' ? idiom.allLocations : data}</option>
           ))
           }
         </Sselect>
-
-        <Sselect onChange={(e) => { changingDataToShow(e) }} defaultValue={selectetion}>
-          {typeOfRecord.map((data: any[], i: number) => (
-            <option key={i} value={data[0]}>{data[1]}</option>
-          ))
-          }
-        </Sselect>
+        }
       </LeftMenu>
 
       <RightMenu>

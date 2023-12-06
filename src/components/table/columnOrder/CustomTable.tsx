@@ -2,7 +2,7 @@
 import { Sth, ColumnName, Resizer, Str, Std } from './styles'
 import { TbArrowBigUpLineFilled, TbArrowBigDownLineFilled } from 'react-icons/tb'
 
-import { useAppDispatch } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 
 import {
   flexRender,
@@ -25,13 +25,14 @@ export default function CustomTable<T extends RowData> ({
   first[0].headers[0].column.columnDef.size = 50
 
   const dispatch = useAppDispatch()
+  const { authState } = useAppSelector(state => state)
 
   const editViewRecord = (rowId: string, cellData: Cell<T, unknown>) => {
     if (cellData.column.id !== 'select') {
       // call the page with data
-      dispatch(setViewPageControl({ viewControl: 'generalInfo', idToEdit: cellData.row.original }))
+      dispatch(setViewPageControl({ viewControl: authState.viewPageControl.tableDefaultToRender, idToEdit: cellData.row.original }))
       // console.log(cellData.column.id)
-      console.log(cellData.row.original)
+      // console.log(cellData.row.original)
       // console.log(rowId)
     }
   }

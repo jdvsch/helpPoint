@@ -1,1 +1,1 @@
-export const building = ['antioquia']
+export const building = ['sede 1']

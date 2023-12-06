@@ -1,5 +1,4 @@
-import { type Props, MainDiv, Button, InfoTag, Company, Location, PathName, PathType } from './styles'
-import { language } from './languages'
+import { type Props, MainDiv, Button, InfoTag, Company, PathName, PathType } from './styles'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
@@ -12,16 +11,13 @@ import LeftMenuModal from '../../modal/leftMenuModal/LeftMenuModal'
 export default function PrivateTopbar ({ Height }: Props) {
   const dispatch = useAppDispatch()
   const { authState } = useAppSelector(state => state)
-  const location = useLocation()
-  const idiom = language[authState.globalStatus.language as keyof typeof language]
+  const path = useLocation()
 
   const showHidetSidebar = () => {
     dispatch(setViewPageControl({ viewLeftMenuModal: true }))
   }
 
-  const headquarters = authState.viewPageControl.activeHeadquarters === 'allLocations'
-    ? idiom.allLocations
-    : authState.viewPageControl.activeHeadquarters
+  const pathType = authState.viewPageControl.tableDefaultToRender
 
   return (
     <MainDiv Height={Height}>
@@ -32,9 +28,9 @@ export default function PrivateTopbar ({ Height }: Props) {
       <InfoTag>
         <span>
           <Company>{authState.globalStatus.companyName}</Company>
-          <Location> /{headquarters}</Location>
-          <PathName> {location.pathname}</PathName>
-          <PathType> /{authState.viewPageControl.tableDefaultToRender}</PathType>
+          <PathName> {path.pathname}</PathName>
+          {(pathType !== 'dashboard' && pathType !== '') &&
+            <PathType> /{authState.viewPageControl.tableDefaultToRender}</PathType>}
         </span>
       </InfoTag>
 

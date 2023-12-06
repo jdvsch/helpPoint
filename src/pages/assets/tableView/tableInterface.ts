@@ -13,6 +13,7 @@ export interface BuildingsInterface extends Model {
 
 export interface equipmentInterface extends Model {
   isPartOf: string
+  location: string
   name: string
   make: string
   model: string
@@ -32,6 +33,7 @@ export interface equipmentInterface extends Model {
 export interface vehiclesInterface extends Model {
   make: string
   model: string
+  location: string
   serialNumber: string
   extra1: string
   extra2: string
@@ -46,6 +48,7 @@ export interface vehiclesInterface extends Model {
 
 export interface toolsInterface extends Model {
   tool_name: string | null
+  location: string
   boolean: string
   year: string
   money: string
@@ -54,6 +57,7 @@ export interface toolsInterface extends Model {
 }
 
 export interface sparePartsInterface extends Model {
+  id: string
   name: string
   unit: string
   partNumber: string
@@ -63,4 +67,5 @@ export interface sparePartsInterface extends Model {
   supplier: string
   minimumAmount: number
   note: string
+  location: string
 }

@@ -9,9 +9,9 @@ padding: 10px;
 export const Header = styled.div`
 display: flex;
 flex-direction: row;
-margin: 20px 0;
+margin: 10px 0;
 select{
-    max-width: 20%;
+    max-width: 40%;
 }
 `
 

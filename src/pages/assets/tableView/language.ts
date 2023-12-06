@@ -12,6 +12,7 @@ export const language = {
     ],
     equipment: [
       { header: 'equipment/machinery', accessorKey: 'name' },
+      { header: 'location', accessorKey: 'location' },
       { header: 'is Part of', accessorKey: 'isPartOf' },
       { header: 'make', accessorKey: 'make' },
       { header: 'model', accessorKey: 'model' },
@@ -27,14 +28,16 @@ export const language = {
     ],
     tools: [
       { header: 'tool_name', accessorKey: 'tool_name' },
+      { header: 'location', accessorKey: 'location' },
       { header: 'boolean', accessorKey: 'boolean' },
       { header: 'year', accessorKey: 'year' },
       { header: 'money', accessorKey: 'money' },
       { header: 'number', accessorKey: 'number' },
       { header: 'time', accessorKey: 'time' }
     ],
-    spare: [
+    spareParts: [
       { header: 'name', accessorKey: 'name' },
+      { header: 'location', accessorKey: 'location' },
       { header: 'unit', accessorKey: 'unit' },
       { header: 'partNumber', accessorKey: 'partNumber' },
       { header: 'make', accessorKey: 'make' },
@@ -46,6 +49,7 @@ export const language = {
     ],
     vehicles: [
       { header: 'make', accessorKey: 'make' },
+      { header: 'location', accessorKey: 'location' },
       { header: 'model', accessorKey: 'model' },
       { header: 'serial number', accessorKey: 'serialNumber' },
       { header: 'priority', accessorKey: 'priority' },
@@ -77,6 +81,7 @@ export const language = {
     ],
     equipment: [
       { header: 'equipo/maquinaria', accessorKey: 'name' },
+      { header: 'location', accessorKey: 'location' },
       { header: 'es parte de', accessorKey: 'isPartOf' },
       { header: 'fabricante', accessorKey: 'make' },
       { header: 'modelo', accessorKey: 'model' },
@@ -91,7 +96,7 @@ export const language = {
       { header: 'nota', accessorKey: 'note' }
     ],
     tools: [],
-    spare: [],
+    spareParts: [],
     vehicles: []
   }
 }

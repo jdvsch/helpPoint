@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SparePartsAndSupplies () {
+export default function SpareParts ({ register }: any) {
   return (
     <div>spareParts&Supplies</div>
   )

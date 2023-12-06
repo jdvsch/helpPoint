@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface AuthState {
-  accessPermits: { menuOptions: string[], submenuOptions: Record<string, unknown> }
+  accessPermits: { locations: string[], menuOptions: string[], submenuOptions: Record<string, unknown> }
   feedbackModal: { initialState: boolean, type: string, message: string, style: Record<string, unknown> }
   globalStatus: { companyName: string, language: string, tableRowSize: number, theme: string, token: string, user: string, windowWidth: number }
   loader: { loading: boolean, error: string }
   publicWebPage: { language: string }
-  viewPageControl: { activeHeadquarters: string, idToEdit: Record<string, unknown>, isDirthy: boolean, menuOptionDefault: string, showHideSaveModal: boolean, menuOptionsSelected: string, tableDefaultToRender: string, viewControl: string, viewLeftMenuModal: boolean }
+  viewPageControl: { activeLocation: string, idToEdit: Record<string, unknown>, isDirthy: boolean, menuOptionDefault: string, showHideSaveModal: boolean, menuOptionsSelected: string, tableDefaultToRender: string, viewControl: string, viewLeftMenuModal: boolean }
 }
 
 const initialState: AuthState = {
-  accessPermits: { menuOptions: [], submenuOptions: {} },
+  accessPermits: { locations: [], menuOptions: [], submenuOptions: {} },
   feedbackModal: { initialState: false, type: '', message: '', style: {} },
   globalStatus: { companyName: '', language: 'English', tableRowSize: 10, theme: 'light', token: '', user: '', windowWidth: 0 },
   loader: { loading: false, error: '' },
   publicWebPage: { language: 'English' },
-  viewPageControl: { activeHeadquarters: '', idToEdit: {}, isDirthy: false, menuOptionDefault: '', showHideSaveModal: false, menuOptionsSelected: '', tableDefaultToRender: '', viewControl: '', viewLeftMenuModal: false }
+  viewPageControl: { activeLocation: '', idToEdit: {}, isDirthy: false, menuOptionDefault: '', showHideSaveModal: false, menuOptionsSelected: '', tableDefaultToRender: '', viewControl: '', viewLeftMenuModal: false }
 }
 
 const authSlice = createSlice({
